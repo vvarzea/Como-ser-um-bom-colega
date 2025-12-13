@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Como ser um bom colega</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: #f4f7fb;
+        padding: 20px;
+        margin: 0;
+    }
+
+    h1 {
+        color: #006b5c;
+        margin-bottom: 5px;
+    }
+
+    .autor {
+        font-size: 15px;
+        margin-top: -5px;
+        color: #006b5c;
+        font-weight: bold;
+    }
+
+    .descricao {
+        max-width: 700px;
+        margin: 8px auto 20px auto;
+        font-size: 16px;
+    }
+
+    /* Barra de progresso */
+    .progress-bar-container {
+        width: 100%;
+        max-width: 520px;
+        margin: 0 auto 15px auto;
+        background: #ddd;
+        height: 18px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #22c55e, #16a34a);
+        transition: width 0.4s ease;
+    }
+
+    .game-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+        align-items: stretch;
+        margin-top: 10px;
+    }
+
+    /* Painel do jogo */
+    .panel {
+        background: white;
+        border-radius: 18px;
+        padding: 18px;
+        max-width: 700px;
+        width: 100%;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+        margin: 0 auto;
+    }
+
+    .panel-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 10px 25px;
+        margin-bottom: 12px;
+    }
+
+    .restart-btn {
+        background: #0f766e;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        margin-left: auto;
+    }
+
+    .question-box {
+        flex: 1 1 260px;
+        text-align: left;
+    }
+
+    .question-text {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0 0 8px 0;
+    }
+
+    .question-label {
+        font-size: 14px;
+        color: #4b5563;
+        margin-bottom: 4px;
+    }
+
+    /* VanBerto dentro do painel */
+    .vb-panel-wrapper {
+        flex: 0 0 180px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .vb-wrapper {
+        width: 100%;
+        max-width: 160px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .vb-robot {
+        width: 100%;
+        max-width: 160px;
+        animation: vbFloat 3s ease-in-out infinite;
+        filter: drop-shadow(0 0 12px #7dd3fc);
+        transition: filter 0.25s ease;
+    }
+
+    /* Reações especiais */
+    .vb-robot.vb-happy {
+        animation: vbFloat 3s ease-in-out infinite, vbJump 0.45s ease-out;
+        filter: drop-shadow(0 0 18px #22c55e);
+    }
+
+    .vb-robot.vb-sad {
+        animation: vbFloat 3s ease-in-out infinite, vbShake 0.4s ease-out;
+        filter: drop-shadow(0 0 18px #f97316);
+    }
+
+    .vb-robot.vb-celebrate {
+        animation: vbFloat 3s ease-in-out infinite, vbCelebrate 0.7s ease-out;
+        filter: drop-shadow(0 0 20px #38bdf8);
+    }
+
+    /* Pálpebra a piscar */
+    .vb-eyelid {
+        transform-origin: 40px 23px;
+        animation: vbBlink 5s ease-in-out infinite;
+    }
+
+    /* Braço a acenar */
+    #vb-arm {
+        transform-origin: 63px 44px;
+        animation: waveVB 1.5s ease-in-out infinite;
+    }
+
+    /* Animações base */
+    @keyframes vbFloat {
+        0%,100% { transform: translateY(0); }
+        50%     { transform: translateY(-8px); }
+    }
+
+    @keyframes vbBlink {
+        0%,92%,100% { transform: scaleY(0); }
+        95%         { transform: scaleY(1); }
+    }
+
+    @keyframes waveVB {
+        0%   { transform: rotate(0deg); }
+        25%  { transform: rotate(-18deg); }
+        50%  { transform: rotate(0deg); }
+        75%  { transform: rotate(-18deg); }
+        100% { transform: rotate(0deg); }
+    }
+
+    /* Reações extra */
+    @keyframes vbJump {
+        0%   { transform: translateY(0); }
+        30%  { transform: translateY(-12px); }
+        60%  { transform: translateY(0); }
+        100% { transform: translateY(-4px); }
+    }
+
+    @keyframes vbShake {
+        0%,100% { transform: translateX(0); }
+        25%     { transform: translateX(-4px); }
+        50%     { transform: translateX(4px); }
+        75%     { transform: translateX(-4px); }
+    }
+
+    @keyframes vbCelebrate {
+        0%   { transform: scale(1); }
+        30%  { transform: scale(1.08); }
+        60%  { transform: scale(0.98); }
+        100% { transform: scale(1.02); }
+    }
+
+    /* Botões de resposta */
+    .options {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .option-btn {
+        font-size: 16px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        background: #3b82f6;
+        color: white;
+        text-align: left;
+        transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
+        box-shadow: 0 2px 6px rgba(37,99,235,0.4);
+    }
+
+    .option-btn span.num {
+        font-weight: bold;
+        margin-right: 6px;
+    }
+
+    .option-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 8px rgba(37,99,235,0.55);
+    }
+
+    .option-btn:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 5px rgba(37,99,235,0.45);
+    }
+
+    .option-btn.correct {
+        background: #22c55e;
+        box-shadow: 0 2px 6px rgba(34,197,94,0.6);
+    }
+
+    .option-btn.wrong {
+        background: #ef4444;
+        box-shadow: 0 2px 6px rgba(239,68,68,0.6);
+    }
+
+    .option-btn.disabled {
+        opacity: 0.65;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    #feedback {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 14px;
+        min-height: 38px;
+    }
+
+    #score {
+        margin-top: 6px;
+        font-size: 15px;
+        color: #4b5563;
+    }
+
+    .final-message {
+        font-size: 20px;
+        margin-top: 15px;
+    }
+
+    .btn-restart-panel {
+        margin-top: 12px;
+        background: #0f766e;
+        color: white;
+        border-radius: 12px;
+        padding: 9px 18px;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+        .panel-header {
+            flex-direction: column;
+        }
+        .question-box {
+            text-align: center;
+        }
+        .question-text {
+            text-align: center;
+        }
+        .options {
+            text-align: left;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Como ser um bom colega</h1>
+<p class="autor">Professora Vanda Várzea</p>
+
+<p class="descricao">
+    Lê a situação com atenção e escolhe a melhor resposta. Um bom colega é simpático, ajuda os outros,
+    escuta com respeito e cuida da sala de aula. O VanBerto’s vai reagir às tuas escolhas! 🤖💚
+</p>
+
+<div class="progress-bar-container">
+    <div class="progress-bar" id="progress-fill"></div>
+</div>
+
+<div class="game-container">
+    <div class="panel">
+
+        <div class="panel-header">
+            <!-- VanBerto no painel -->
+            <div class="vb-panel-wrapper">
+                <div class="vb-wrapper">
+                    <div class="vb-robot" id="vb-robot">
+                        <svg viewBox="0 0 80 80">
+                            <defs>
+                                <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#e5f2ff"/>
+                                    <stop offset="100%" stop-color="#bfdbfe"/>
+                                </linearGradient>
+                                <linearGradient id="visorGrad" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#22d3ee"/>
+                                    <stop offset="100%" stop-color="#38bdf8"/>
+                                </linearGradient>
+                            </defs>
+
+                            <circle cx="40" cy="40" r="34" fill="rgba(147,197,253,0.35)"/>
+
+                            <rect x="18" y="30" width="44" height="32" rx="14" fill="url(#bodyGrad)"/>
+                            <circle cx="40" cy="46" r="7" fill="#9ca3af"/>
+
+                            <rect x="22" y="10" width="36" height="26" rx="13" fill="url(#bodyGrad)"/>
+                            <rect x="26" y="15" width="28" height="16" rx="8" fill="url(#visorGrad)"/>
+
+                            <rect class="vb-eyelid" x="26" y="15" width="28" height="16" rx="8"
+                                  fill="#e5f2ff" opacity="0.9"/>
+
+                            <circle cx="33" cy="23" r="2.5" fill="#0f172a"/>
+                            <circle cx="47" cy="23" r="2.5" fill="#0f172a"/>
+
+                            <line x1="40" y1="10" x2="40" y2="4" stroke="#38bdf8" stroke-width="2"/>
+                            <circle cx="40" cy="3" r="2.5" fill="#38bdf8"/>
+
+                            <rect x="12" y="34" width="6" height="20" rx="3" fill="#e5e7eb"/>
+                            <rect id="vb-arm" x="62" y="34" width="6" height="20" rx="3" fill="#e5e7eb"/>
+
+                            <rect x="22" y="58" width="12" height="8" rx="3" fill="#1f2937"/>
+                            <rect x="46" y="58" width="12" height="8" rx="3" fill="#1f2937"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Texto da pergunta -->
+            <div class="question-box">
+                <button class="restart-btn" onclick="startGame()">Reiniciar jogo</button>
+                <p class="question-label" id="question-counter">Pergunta 1 de 15</p>
+                <p class="question-text" id="question-text">
+                    (Pergunta aqui)
+                </p>
+            </div>
+        </div>
+
+        <div class="options">
+            <button class="option-btn" id="opt0"><span class="num">1)</span><span class="txt"></span></button>
+            <button class="option-btn" id="opt1"><span class="num">2)</span><span class="txt"></span></button>
+            <button class="option-btn" id="opt2"><span class="num">3)</span><span class="txt"></span></button>
+        </div>
+
+        <div id="feedback"></div>
+        <div id="score">Pontuação: 0</div>
+        <div id="final"></div>
+
+    </div>
+</div>
+
+<script>
+/* ------------------ PERGUNTAS ------------------- */
+const questionsData = [
+    {
+        text: "Um colega chega de manhã à sala. O que fazes?",
+        options: [
+            "Cumprimentas com um sorriso.",
+            "Virar a cara para o lado.",
+            "Fingir que não o vês."
+        ],
+        correct: 0
+    },
+    {
+        text: "A professora está a explicar e tu queres falar. O que deves fazer?",
+        options: [
+            "Levantar a mão e esperar a tua vez.",
+            "Começar a falar por cima.",
+            "Fazer barulho para chamar atenção."
+        ],
+        correct: 0
+    },
+    {
+        text: "Um colega deixa cair os lápis no chão. O que faz um bom colega?",
+        options: [
+            "Ajudar a apanhar os lápis.",
+            "Rir-se dele.",
+            "Ignorar e continuar."
+        ],
+        correct: 0
+    },
+    {
+        text: "Chegas à sala e vês lixo no chão. O que fazes?",
+        options: [
+            "Apanhas e colocas no caixote do lixo.",
+            "Empurras com o pé.",
+            "Finges que não é contigo."
+        ],
+        correct: 0
+    },
+    {
+        text: "Uma colega nova chegou à turma. O que fazes?",
+        options: [
+            "Recebes com um sorriso e dizes olá.",
+            "Ignoras a colega nova.",
+            "Fazes uma piada sobre ela."
+        ],
+        correct: 0
+    },
+    {
+        text: "Um colega está triste no recreio. O que faz um bom colega?",
+        options: [
+            "Perguntar se precisa de ajuda.",
+            "Dizer “isso não é problema meu”.",
+            "Rir-se da cara dele."
+        ],
+        correct: 0
+    },
+    {
+        text: "Estás num trabalho de grupo. Como age um bom colega?",
+        options: [
+            "Partilha ideias e ouve os outros.",
+            "Querer mandar em tudo sozinho.",
+            "Não deixar ninguém falar."
+        ],
+        correct: 0
+    },
+    {
+        text: "Estás a fazer barulho e a professora pede silêncio. O que fazes?",
+        options: [
+            "Paras de falar e ficas atento.",
+            "Continuas a falar.",
+            "Resmungas e fazes ainda mais barulho."
+        ],
+        correct: 0
+    },
+    {
+        text: "Um colega pede um lápis emprestado porque o dele partiu. O que fazes?",
+        options: [
+            "Emprestas, se puderes.",
+            "Dizes “não” só para chatear.",
+            "Gozas porque ele não tem lápis."
+        ],
+        correct: 0
+    },
+    {
+        text: "Tens um erro no caderno. Como reage um bom colega consigo próprio?",
+        options: [
+            "Pede ajuda com calma para corrigir.",
+            "Atira o caderno com raiva.",
+            "Culpa os colegas pelo erro."
+        ],
+        correct: 0
+    },
+    {
+        text: "A professora pede para arrumar o computador ou tablet. O que fazes?",
+        options: [
+            "Arrumas com cuidado, como te ensinaram.",
+            "Fechas à pressa e deixas tudo desarrumado.",
+            "Dizes que não foste tu que usaste."
+        ],
+        correct: 0
+    },
+    {
+        text: "Um colega fala contigo enquanto trabalhas. O que fazes?",
+        options: [
+            "Dizes que depois falam, porque agora estás a trabalhar.",
+            "Começas uma conversa longa no meio da aula.",
+            "Ignoras e ficas irritado com ele."
+        ],
+        correct: 0
+    },
+    {
+        text: "Queres brincar com o brinquedo de um colega. O que fazes?",
+        options: [
+            "Pedes com educação para brincar também.",
+            "Tiras o brinquedo da mão do colega.",
+            "Se ele diz não, ficas muito zangado."
+        ],
+        correct: 0
+    },
+    {
+        text: "Tens de partilhar materiais em grupo. O que faz um bom colega?",
+        options: [
+            "Usa e depois passa aos outros.",
+            "Guarda tudo só para si.",
+            "Esconde os materiais para ninguém usar."
+        ],
+        correct: 0
+    },
+    {
+        text: "Um colega comete um erro numa actividade. Como és um bom colega?",
+        options: [
+            "Ajudas e dizes que está tudo bem, todos erram.",
+            "Gozas com ele à frente da turma.",
+            "Gritas que ele errou."
+        ],
+        correct: 0
+    }
+];
+
+/* ------------------ DOM ------------------- */
+const questionTextEl = document.getElementById("question-text");
+const questionCounterEl = document.getElementById("question-counter");
+const feedbackEl = document.getElementById("feedback");
+const scoreEl = document.getElementById("score");
+const finalEl = document.getElementById("final");
+const progressFill = document.getElementById("progress-fill");
+
+const optionButtons = [
+    document.getElementById("opt0"),
+    document.getElementById("opt1"),
+    document.getElementById("opt2")
+];
+
+const vbRobot = document.getElementById("vb-robot");
+
+/* ------------------ ÁUDIO ------------------- */
+let audioCtx = null;
+
+function initAudio() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+}
+
+function playTone(freq, time, duration, type = "square", vol = 0.25) {
+    if (!audioCtx) return;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + time);
+    gain.gain.setValueAtTime(vol, audioCtx.currentTime + time);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(audioCtx.currentTime + time);
+    osc.stop(audioCtx.currentTime + time + duration);
+}
+
+function soundCorrect() {
+    initAudio();
+    playTone(900, 0,   0.10);
+    playTone(1200,0.10,0.10);
+    playTone(1500,0.20,0.12);
+}
+
+function soundWrong() {
+    initAudio();
+    playTone(260, 0,   0.16, "square", 0.3);
+    playTone(180, 0.16,0.18, "square", 0.3);
+}
+
+function soundWin() {
+    initAudio();
+    playTone(700, 0,    0.16);
+    playTone(900, 0.18, 0.16);
+    playTone(1100,0.36, 0.20);
+    playTone(1400,0.60, 0.24);
+}
+
+/* ------------------ ESTADO ------------------- */
+let questions = [];
+let currentIndex = 0;
+let score = 0;
+const totalQuestions = 15;
+
+/* ------------------ FUNÇÕES ------------------- */
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+function resetRobotClasses() {
+    vbRobot.classList.remove("vb-happy", "vb-sad", "vb-celebrate");
+}
+
+function updateProgress(initial = false) {
+    let pct;
+
+    if (initial) {
+        pct = 0; // No início da primeira pergunta
+    } else {
+        pct = ((currentIndex + 1) / totalQuestions) * 100;
+    }
+
+    progressFill.style.width = pct + "%";
+}
+
+function startGame() {
+    questions = [...questionsData];
+    shuffle(questions);
+    questions = questions.slice(0, totalQuestions);
+
+    currentIndex = 0;
+    score = 0;
+    feedbackEl.textContent = "";
+    finalEl.innerHTML = "";
+    resetRobotClasses();
+    updateScore();
+    updateProgress(true);  // PROGRESSO CORRIGIDO
+    enableOptions(true);
+    showQuestion();
+}
+
+function showQuestion() {
+    const q = questions[currentIndex];
+    questionTextEl.textContent = q.text;
+    questionCounterEl.textContent = "Pergunta " + (currentIndex + 1) + " de " + totalQuestions;
+    feedbackEl.textContent = "";
+
+    q.options.forEach((optText, i) => {
+        const btn = optionButtons[i];
+        btn.classList.remove("correct", "wrong", "disabled");
+        btn.querySelector(".txt").textContent = optText;
+    });
+
+    updateProgress();  // PROGRESSO CORRIGIDO (atualiza ao mostrar cada pergunta)
+}
+
+function updateScore() {
+    scoreEl.textContent = "Pontuação: " + score;
+}
+
+function enableOptions(enable) {
+    optionButtons.forEach(btn => {
+        if (enable) {
+            btn.classList.remove("disabled");
+            btn.disabled = false;
+        } else {
+            btn.classList.add("disabled");
+            btn.disabled = true;
+        }
+    });
+}
+
+function handleAnswer(index) {
+    initAudio();
+    enableOptions(false);
+    resetRobotClasses();
+
+    const q = questions[currentIndex];
+    const correctIndex = q.correct;
+    const clickedBtn = optionButtons[index];
+    const correctBtn = optionButtons[correctIndex];
+
+    if (index === correctIndex) {
+        score++;
+        updateScore();
+        feedbackEl.style.color = "#16a34a";
+        feedbackEl.textContent = "✔️ Muito bem! Essa é a atitude de um bom colega!";
+        clickedBtn.classList.add("correct");
+        vbRobot.classList.add("vb-happy");
+        soundCorrect();
+    } else {
+        feedbackEl.style.color = "#dc2626";
+        feedbackEl.textContent = "❌ Ups! Um bom colega faria a opção número " + (correctIndex + 1) + ".";
+        clickedBtn.classList.add("wrong");
+        correctBtn.classList.add("correct");
+        vbRobot.classList.add("vb-sad");
+        soundWrong();
+    }
+
+    setTimeout(() => {
+        resetRobotClasses();
+        currentIndex++;
+        if (currentIndex < totalQuestions) {
+            enableOptions(true);
+            showQuestion();
+        } else {
+            endGame();
+        }
+    }, 1900);
+}
+
+function endGame() {
+    resetRobotClasses();
+    vbRobot.classList.add("vb-celebrate");
+    soundWin();
+    updateProgress(); // Fica a 100% no fim
+    progressFill.style.width = "100%";
+
+    let msg = "";
+    if (score === totalQuestions) {
+        msg = "🏆 Fantástico! Foste um excelente colega em todas as situações!";
+    } else if (score >= totalQuestions * 0.6) {
+        msg = "🎉 Muito bem! Foste um bom colega em " + score + " de " + totalQuestions + " situações!";
+    } else {
+        msg = "😊 Terminaste! Acertaste em " + score + " de " + totalQuestions + ". Continua a praticar!";
+    }
+
+    finalEl.innerHTML = `
+        <div class="final-message">${msg}</div>
+        <button class="btn-restart-panel" onclick="startGame()">Jogar outra vez</button>
+    `;
+}
+
+/* ------------------ EVENTOS ------------------- */
+optionButtons.forEach((btn, i) => {
+    btn.addEventListener("click", () => handleAnswer(i));
+});
+
+/* Iniciar jogo */
+startGame();
+</script>
+
+</body>
+</html>
