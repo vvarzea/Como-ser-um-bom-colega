@@ -1,730 +1,543 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
 <meta charset="UTF-8">
-<title>Como ser um bom colega</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0f766e"><link rel="icon" href="icon-192.png">
+<title>VanBerto's – Como ser um bom colega</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        background: #f4f7fb;
-        padding: 20px;
-        margin: 0;
-    }
-
-    h1 {
-        color: #006b5c;
-        margin-bottom: 5px;
-    }
-
-    .autor {
-        font-size: 15px;
-        margin-top: -5px;
-        color: #006b5c;
-        font-weight: bold;
-    }
-
-    .descricao {
-        max-width: 700px;
-        margin: 8px auto 20px auto;
-        font-size: 16px;
-    }
-
-    /* Barra de progresso */
-    .progress-bar-container {
-        width: 100%;
-        max-width: 520px;
-        margin: 0 auto 15px auto;
-        background: #ddd;
-        height: 18px;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    .progress-bar {
-        height: 100%;
-        width: 0%;
-        background: linear-gradient(90deg, #22c55e, #16a34a);
-        transition: width 0.4s ease;
-    }
-
-    .game-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 25px;
-        align-items: stretch;
-        margin-top: 10px;
-    }
-
-    /* Painel do jogo */
-    .panel {
-        background: white;
-        border-radius: 18px;
-        padding: 18px;
-        max-width: 700px;
-        width: 100%;
-        box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-        margin: 0 auto;
-    }
-
-    .panel-header {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 10px 25px;
-        margin-bottom: 12px;
-    }
-
-    .restart-btn {
-        background: #0f766e;
-        color: white;
-        padding: 8px 16px;
-        border-radius: 12px;
-        border: none;
-        cursor: pointer;
-        font-size: 14px;
-        margin-left: auto;
-    }
-
-    .question-box {
-        flex: 1 1 260px;
-        text-align: left;
-    }
-
-    .question-text {
-        font-size: 18px;
-        font-weight: bold;
-        margin: 0 0 8px 0;
-    }
-
-    .question-label {
-        font-size: 14px;
-        color: #4b5563;
-        margin-bottom: 4px;
-    }
-
-    /* VanBerto dentro do painel */
-    .vb-panel-wrapper {
-        flex: 0 0 180px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .vb-wrapper {
-        width: 100%;
-        max-width: 160px;
-        margin: 0 auto;
-        position: relative;
-    }
-
-    .vb-robot {
-        width: 100%;
-        max-width: 160px;
-        animation: vbFloat 3s ease-in-out infinite;
-        filter: drop-shadow(0 0 12px #7dd3fc);
-        transition: filter 0.25s ease;
-    }
-
-    /* Reações especiais */
-    .vb-robot.vb-happy {
-        animation: vbFloat 3s ease-in-out infinite, vbJump 0.45s ease-out;
-        filter: drop-shadow(0 0 18px #22c55e);
-    }
-
-    .vb-robot.vb-sad {
-        animation: vbFloat 3s ease-in-out infinite, vbShake 0.4s ease-out;
-        filter: drop-shadow(0 0 18px #f97316);
-    }
-
-    .vb-robot.vb-celebrate {
-        animation: vbFloat 3s ease-in-out infinite, vbCelebrate 0.7s ease-out;
-        filter: drop-shadow(0 0 20px #38bdf8);
-    }
-
-    /* Pálpebra a piscar */
-    .vb-eyelid {
-        transform-origin: 40px 23px;
-        animation: vbBlink 5s ease-in-out infinite;
-    }
-
-    /* Braço a acenar */
-    #vb-arm {
-        transform-origin: 63px 44px;
-        animation: waveVB 1.5s ease-in-out infinite;
-    }
-
-    /* Animações base */
-    @keyframes vbFloat {
-        0%,100% { transform: translateY(0); }
-        50%     { transform: translateY(-8px); }
-    }
-
-    @keyframes vbBlink {
-        0%,92%,100% { transform: scaleY(0); }
-        95%         { transform: scaleY(1); }
-    }
-
-    @keyframes waveVB {
-        0%   { transform: rotate(0deg); }
-        25%  { transform: rotate(-18deg); }
-        50%  { transform: rotate(0deg); }
-        75%  { transform: rotate(-18deg); }
-        100% { transform: rotate(0deg); }
-    }
-
-    /* Reações extra */
-    @keyframes vbJump {
-        0%   { transform: translateY(0); }
-        30%  { transform: translateY(-12px); }
-        60%  { transform: translateY(0); }
-        100% { transform: translateY(-4px); }
-    }
-
-    @keyframes vbShake {
-        0%,100% { transform: translateX(0); }
-        25%     { transform: translateX(-4px); }
-        50%     { transform: translateX(4px); }
-        75%     { transform: translateX(-4px); }
-    }
-
-    @keyframes vbCelebrate {
-        0%   { transform: scale(1); }
-        30%  { transform: scale(1.08); }
-        60%  { transform: scale(0.98); }
-        100% { transform: scale(1.02); }
-    }
-
-    /* Botões de resposta */
-    .options {
-        margin-top: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .option-btn {
-        font-size: 16px;
-        padding: 10px 14px;
-        border-radius: 999px;
-        border: none;
-        cursor: pointer;
-        background: #3b82f6;
-        color: white;
-        text-align: left;
-        transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
-        box-shadow: 0 2px 6px rgba(37,99,235,0.4);
-    }
-
-    .option-btn span.num {
-        font-weight: bold;
-        margin-right: 6px;
-    }
-
-    .option-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 3px 8px rgba(37,99,235,0.55);
-    }
-
-    .option-btn:active {
-        transform: translateY(0);
-        box-shadow: 0 1px 5px rgba(37,99,235,0.45);
-    }
-
-    .option-btn.correct {
-        background: #22c55e;
-        box-shadow: 0 2px 6px rgba(34,197,94,0.6);
-    }
-
-    .option-btn.wrong {
-        background: #ef4444;
-        box-shadow: 0 2px 6px rgba(239,68,68,0.6);
-    }
-
-    .option-btn.disabled {
-        opacity: 0.65;
-        cursor: default;
-        pointer-events: none;
-    }
-
-    #feedback {
-        font-size: 18px;
-        font-weight: bold;
-        margin-top: 14px;
-        min-height: 38px;
-    }
-
-    #score {
-        margin-top: 6px;
-        font-size: 15px;
-        color: #4b5563;
-    }
-
-    .final-message {
-        font-size: 20px;
-        margin-top: 15px;
-    }
-
-    .btn-restart-panel {
-        margin-top: 12px;
-        background: #0f766e;
-        color: white;
-        border-radius: 12px;
-        padding: 9px 18px;
-        font-size: 15px;
-        border: none;
-        cursor: pointer;
-    }
-
-    @media (max-width: 640px) {
-        .panel-header {
-            flex-direction: column;
-        }
-        .question-box {
-            text-align: center;
-        }
-        .question-text {
-            text-align: center;
-        }
-        .options {
-            text-align: left;
-        }
-    }
+*{box-sizing:border-box}
+html,body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+body{min-height:100vh;display:flex;justify-content:center;align-items:flex-start;transition:background .4s}
+.s0{background:radial-gradient(circle at top,#38bdf8,#020617 65%)}
+.s1{background:radial-gradient(circle at top,#22c55e,#052e16 65%)}
+.s2{background:radial-gradient(circle at top,#4f46e5,#020617 65%)}
+.s3{background:radial-gradient(circle at top,#a855f7,#1e1b4b 65%)}
+.s4{background:radial-gradient(circle at top,#0ea5e9,#0f172a 65%)}
+.s5{background:radial-gradient(circle at top,#fb7185,#4a044e 65%)}
+.s6{background:radial-gradient(circle at top,#ef4444,#450a0a 65%)}
+.s7{background:radial-gradient(circle at top,#facc15,#78350f 65%)}
+.sf{background:radial-gradient(circle at top,#22c55e,#14532d 65%)}
+.star,.meteor,.confetti{position:fixed;pointer-events:none;z-index:9999}
+.star{top:-10px;background:#fff;border-radius:50%;animation:fall linear forwards,tw ease-in-out infinite}
+@keyframes fall{to{transform:translateY(110vh)}}
+@keyframes tw{0%,100%{opacity:.2}50%{opacity:1}}
+.meteor{top:-20px;width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#facc15,#f97316);box-shadow:0 0 10px #facc15;animation:met linear forwards}
+@keyframes met{to{transform:translate3d(-80vw,110vh,0)}}
+.confetti{width:8px;height:14px;border-radius:2px;top:-10px;animation:conf linear forwards}
+@keyframes conf{to{transform:translate3d(0,110vh,0) rotate(360deg)}}
+#game{width:100%;max-width:960px;margin:16px;padding:18px 20px 14px;background:rgba(248,250,252,.96);border-radius:24px;box-shadow:0 16px 40px rgba(15,23,42,.55);position:relative;z-index:2}
+#bar{height:10px;background:#e5e7eb;border-radius:99px;overflow:hidden}
+#fill{height:100%;width:0;background:linear-gradient(90deg,#22c55e,#0ea5e9);transition:width .3s}
+#top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin:8px 0}
+#prog{font-weight:700;color:#0f172a;font-size:.9rem}
+.box{display:inline-block;background:linear-gradient(135deg,#eef2ff,#e0f2fe);border-radius:99px;padding:5px 12px;font-size:.9rem;margin-left:6px;box-shadow:0 2px 6px rgba(15,23,42,.12)}
+#snd,#vz{border:0;background:#e0e7ff;border-radius:99px;padding:6px 12px;font-size:.85rem;cursor:pointer;margin-left:6px}
+#hero{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:6px 0}
+#vb{width:130px;flex:none;filter:drop-shadow(0 0 8px rgba(125,211,252,.7))}
+#vb canvas{width:100%;height:auto;display:block;animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-7px)}}
+.vb-eyelid{transform-origin:40px 23px;animation:blink 5s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(0)}95%{transform:scaleY(1)}}
+.vb-arm{transform-origin:63px 44px;animation:wave 1.6s ease-in-out infinite}
+@keyframes wave{0%,50%,100%{transform:rotate(0)}25%,75%{transform:rotate(-16deg)}}
+#vb.glow canvas{animation:glow .45s}
+#vb.shake canvas{animation:shake .3s}
+#vb.dance canvas{animation:dance .9s}
+@keyframes glow{50%{filter:drop-shadow(0 0 18px #7dd3fc);transform:scale(1.08)}}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes dance{15%{transform:translateX(-8px) rotate(-10deg)}30%{transform:translateX(8px) rotate(8deg)}45%{transform:translateX(-6px) skewX(-10deg)}60%{transform:translateX(6px) skewX(10deg)}80%{transform:translateX(-4px) rotate(-8deg)}}
+#talk{flex:1;min-width:220px;max-width:560px;text-align:left}
+#zone{font-size:.8rem;letter-spacing:.12em;color:#6b7280;text-transform:uppercase}
+#title{font-size:1.35rem;font-weight:800;color:#020617;margin:2px 0}
+#fala{background:#e0f2fe;border-radius:16px;padding:10px 14px;color:#0f172a;font-size:1rem}
+#mission{background:radial-gradient(circle at top left,#e5edff,#fff 60%);border-radius:18px;padding:12px;min-height:200px;margin-top:8px;animation:in .35s}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.panel{background:#fff;border-radius:16px;padding:10px;box-shadow:0 4px 12px rgba(15,23,42,.1)}
+.pt{font-weight:700;margin-bottom:6px;color:#111827}
+.row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:6px}
+.tag{display:inline-flex;align-items:center;justify-content:center;min-height:48px;min-width:110px;padding:8px 14px;border-radius:14px;border:2px solid transparent;background:#fff;box-shadow:0 1px 4px rgba(15,23,42,.15);cursor:pointer;font-size:1rem;text-align:center;user-select:none;transition:transform .12s}
+.tag:hover{transform:translateY(-1px)}
+.selected{border-color:#4f46e5;background:#e0e7ff}
+.correct{border-color:#16a34a;background:#dcfce7}
+.wrong{border-color:#dc2626;background:#fee2e2;animation:shake .25s}
+.disabled{opacity:.6;pointer-events:none}
+.stmt{margin-bottom:8px;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}
+#fb{min-height:26px;margin-top:8px;font-weight:700;text-align:center}
+#fb.ok{color:#16a34a}#fb.err{color:#dc2626}
+.btn{margin:10px 4px 0;padding:11px 22px;border:0;border-radius:99px;background:linear-gradient(135deg,#4f46e5,#2563eb);color:#fff;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(37,99,235,.5)}
+#ctrl{text-align:center}
+.final{text-align:center;padding:16px}
+.final .big{font-size:3rem}
+#credit{text-align:center;margin-top:12px;font-size:.85rem;color:#4b5563}
+@media(max-width:600px){#game{margin:8px;padding:12px}#vb{width:100px}#talk{text-align:center}}
+@media(prefers-reduced-motion:reduce){.star,.meteor{display:none}}
+.tag{font:inherit;color:#0f172a}
+.tag:focus-visible,#fvb:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+body{padding-bottom:120px}
+#pn{font:inherit;font-size:1.1rem;padding:10px 14px;border-radius:12px;border:2px solid #4f46e5;text-align:center;margin:8px 0;max-width:100%}
+.rev{background:#fef3c7;border-radius:12px;padding:8px 12px;margin:8px auto;max-width:520px;font-size:.95rem}
+#fw{position:fixed;bottom:.6rem;right:.8rem;z-index:70;display:flex;flex-direction:column;align-items:center;gap:2px}
+#fvb{width:clamp(70px,9vw,96px);height:auto;cursor:pointer;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 0 12px #7dd3fc)}
+#fvb.glow{animation:glow .45s}#fvb.shake{animation:shake .3s}#fvb.dance{animation:dance .9s}
+#fbub{position:relative;background:linear-gradient(135deg,#dcebff,#fff);border:3px solid #0f172a;border-radius:16px;padding:6px 10px;box-shadow:3px 3px 0 #0f172a;font:700 .8rem "Trebuchet MS",sans-serif;color:#0f172a;max-width:170px;text-align:center;opacity:0;transform:translateY(-6px) scale(.88);transition:opacity .35s,transform .35s;margin-bottom:12px;pointer-events:none}
+#fbub.show{opacity:1;transform:none}
+#fbub::after{content:"";position:absolute;bottom:-13px;left:50%;transform:translateX(-50%);border:9px solid transparent;border-top:12px solid #0f172a;border-bottom:0}
+#fname{font-weight:800;font-size:.85rem;color:#fde047;text-shadow:0 1px 6px #000;max-width:150px;text-align:center;overflow-wrap:anywhere}
+#talk{max-width:640px;margin:0 auto;text-align:center}#hero{display:block}
+#fw{touch-action:none;cursor:grab;user-select:none}
+body{padding-bottom:20px}
+.it{touch-action:none;cursor:grab}
+.ghost{position:fixed;z-index:10000;pointer-events:none;transform:translate(-50%,-50%) scale(1.06);min-width:0;opacity:.95;box-shadow:0 10px 24px rgba(15,23,42,.4);border-color:#4f46e5}
+.dragging{opacity:.35}
+.tgt.over{border-color:#4f46e5;background:#e0e7ff;transform:scale(1.05)}
+.sticky{position:sticky;top:8px;align-self:start}
+.sticky .row{flex-direction:column;align-items:stretch}
+.tgt{flex-direction:column;align-items:stretch;width:100%;min-height:72px}
+.tgt .lab{font-weight:700}
+.in{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:6px}
+.chip{background:#dcfce7;border:1px solid #16a34a;border-radius:10px;padding:3px 8px;font-size:.8rem;animation:popc .25s}
+@keyframes popc{from{transform:scale(.5);opacity:0}}
+#vz{border:0;background:#e0e7ff;border-radius:99px;padding:6px 12px;font-size:.85rem;cursor:pointer;margin-left:6px}
+.lvh{font-size:.85rem;color:#4b5563}
+#dipl{position:fixed;inset:0;z-index:20000;background:#fff;display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto;color:#0f172a}
+.dp{border:10px double #b45309;padding:24px 32px;text-align:center;max-width:760px;width:100%;background:#fffbeb}
+.dpb{font-size:4rem}.dp h1{font-size:2.4rem;margin:.2em 0;color:#1d4ed8}.sig{margin-top:20px;color:#4b5563}
+@media(max-width:600px){.cols{grid-template-columns:1fr 1fr}.tag{min-width:0;padding:8px;font-size:.92rem}.dp{padding:14px}}
+@media print{body>*:not(#dipl){display:none!important}body{background:#fff!important;display:block}#dipl{position:static;display:block}.np{display:none}}
+.stripe{display:flex;height:8px;max-width:320px;margin:0 auto 10px;border-radius:6px;overflow:hidden}.stripe i{flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0}.chip2{border-radius:12px;padding:4px 10px;font-size:.85rem;font-weight:700}
 </style>
 </head>
+<body class="s0">
+<div id="game">
+  <div class="stripe" id="stripe" aria-hidden="true"></div>
+  <div id="bar"><div id="fill"></div></div>
+  <div id="top">
+    <div id="prog"></div>
+    <div><span class="box">⭐ <b id="p">0</b></span><span class="box" id="st" style="display:none">🔥 <b id="sk">0</b></span><span class="box" id="tm" style="display:none"></span><span class="box">✔ <b id="c">0</b></span><span class="box">✘ <b id="w">0</b></span><button id="snd" type="button">🔊 Som</button><button id="vz" type="button">🤐 Voz desligada</button></div>
+  </div>
 
-<body>
+  <div id="hero">
+    <div id="talk"><div id="zone"></div><div id="title"></div><div id="fala"></div></div>
+  </div>
 
-<h1>Como ser um bom colega</h1>
-<p class="autor">Professora Vanda Várzea</p>
-
-<p class="descricao">
-    Lê a situação com atenção e escolhe a melhor resposta. Um bom colega é simpático, ajuda os outros,
-    escuta com respeito e cuida da sala de aula. O VanBerto’s vai reagir às tuas escolhas! 🤖💚
-</p>
-
-<div class="progress-bar-container">
-    <div class="progress-bar" id="progress-fill"></div>
-</div>
-
-<div class="game-container">
-    <div class="panel">
-
-        <div class="panel-header">
-            <!-- VanBerto no painel -->
-            <div class="vb-panel-wrapper">
-                <div class="vb-wrapper">
-                    <div class="vb-robot" id="vb-robot">
-                        <svg viewBox="0 0 80 80">
-                            <defs>
-                                <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stop-color="#e5f2ff"/>
-                                    <stop offset="100%" stop-color="#bfdbfe"/>
-                                </linearGradient>
-                                <linearGradient id="visorGrad" x1="0" y1="0" x2="1" y2="1">
-                                    <stop offset="0%" stop-color="#22d3ee"/>
-                                    <stop offset="100%" stop-color="#38bdf8"/>
-                                </linearGradient>
-                            </defs>
-
-                            <circle cx="40" cy="40" r="34" fill="rgba(147,197,253,0.35)"/>
-
-                            <rect x="18" y="30" width="44" height="32" rx="14" fill="url(#bodyGrad)"/>
-                            <circle cx="40" cy="46" r="7" fill="#9ca3af"/>
-
-                            <rect x="22" y="10" width="36" height="26" rx="13" fill="url(#bodyGrad)"/>
-                            <rect x="26" y="15" width="28" height="16" rx="8" fill="url(#visorGrad)"/>
-
-                            <rect class="vb-eyelid" x="26" y="15" width="28" height="16" rx="8"
-                                  fill="#e5f2ff" opacity="0.9"/>
-
-                            <circle cx="33" cy="23" r="2.5" fill="#0f172a"/>
-                            <circle cx="47" cy="23" r="2.5" fill="#0f172a"/>
-
-                            <line x1="40" y1="10" x2="40" y2="4" stroke="#38bdf8" stroke-width="2"/>
-                            <circle cx="40" cy="3" r="2.5" fill="#38bdf8"/>
-
-                            <rect x="12" y="34" width="6" height="20" rx="3" fill="#e5e7eb"/>
-                            <rect id="vb-arm" x="62" y="34" width="6" height="20" rx="3" fill="#e5e7eb"/>
-
-                            <rect x="22" y="58" width="12" height="8" rx="3" fill="#1f2937"/>
-                            <rect x="46" y="58" width="12" height="8" rx="3" fill="#1f2937"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Texto da pergunta -->
-            <div class="question-box">
-                <button class="restart-btn" onclick="startGame()">Reiniciar jogo</button>
-                <p class="question-label" id="question-counter">Pergunta 1 de 15</p>
-                <p class="question-text" id="question-text">
-                    (Pergunta aqui)
-                </p>
-            </div>
-        </div>
-
-        <div class="options">
-            <button class="option-btn" id="opt0"><span class="num">1)</span><span class="txt"></span></button>
-            <button class="option-btn" id="opt1"><span class="num">2)</span><span class="txt"></span></button>
-            <button class="option-btn" id="opt2"><span class="num">3)</span><span class="txt"></span></button>
-        </div>
-
-        <div id="feedback"></div>
-        <div id="score">Pontuação: 0</div>
-        <div id="final"></div>
-
-    </div>
+  <div id="mission"></div>
+  <div id="fb"></div>
+  <div id="ctrl"><button id="next" class="btn" style="display:none"></button><button id="dip" class="btn" style="display:none">🎓 Diploma</button><button id="again" class="btn" style="display:none">↺ Jogar de novo</button></div>
+  <div id="fw"><div id="fbub" role="status" aria-live="polite"></div><canvas id="fvb" role="button" tabindex="0" aria-label="VanBerto's – clica para uma dica"></canvas><div id="fname">👤 Bom colega</div></div>
+  <div id="credit">© Prof.ª Vanda Várzea</div>
 </div>
 
 <script>
-/* ------------------ PERGUNTAS ------------------- */
+const $=id=>document.getElementById(id);
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const shuf=a=>[...a].sort(()=>Math.random()-.5);
+
+/* ===== Fundo: estrelas e meteoros ===== */
+setInterval(()=>{const s=el('div','star'),t=Math.random()*3+1,d=Math.random()*4+4;
+  s.style.cssText=`width:${t}px;height:${t}px;left:${Math.random()*innerWidth}px;animation-duration:${d}s,${Math.random()*1.5+1.5}s`;
+  document.body.appendChild(s);setTimeout(()=>s.remove(),d*1000)},200);
+(function met(){const m=el('div','meteor'),d=Math.random()*3+4;
+  m.style.left=innerWidth*(.6+Math.random()*.4)+'px';m.style.animationDuration=d+'s';
+  document.body.appendChild(m);setTimeout(()=>m.remove(),d*1000);setTimeout(met,4000+Math.random()*6000)})();
+
+/* ===== Som e voz ===== */
+let ac=null,sound=true,voice=false;
+$('snd').onclick=()=>{sound=!sound;$('snd').textContent=sound?'🔊 Som':'🔇 Som'};
+$('vz').onclick=()=>{voice=!voice;$('vz').textContent=voice?'🗣️ Voz ligada':'🤐 Voz desligada';if(!voice&&window.speechSynthesis)speechSynthesis.cancel()};
+function beep(notes){if(!sound)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();
+  notes.forEach(([f,d,o])=>{const os=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime+o;
+    os.type='square';os.frequency.value=f;os.connect(g);g.connect(ac.destination);
+    g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);os.start(t);os.stop(t+d)})}catch(e){}}
+const SND={ok:[[660,.12,0],[880,.12,.12]],err:[[220,.18,0],[160,.2,.12]],next:[[440,.1,0],[660,.1,.11]],fim:[[523,.12,0],[659,.12,.14],[784,.14,.28],[1046,.18,.45]]};
+function say(t){if(!voice||!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='pt-PT';speechSynthesis.speak(u)}
+
+/* ===== Robô ===== */
+function rrVan(ctx,x,y,w,h,r){
+  const rr=Math.min(r,w/2,h/2);
+  ctx.beginPath();ctx.moveTo(x+rr,y);ctx.arcTo(x+w,y,x+w,y+h,rr);ctx.arcTo(x+w,y+h,x,y+h,rr);ctx.arcTo(x,y+h,x,y,rr);ctx.arcTo(x,y,x+w,y,rr);ctx.closePath();
+}
+function cfVan(ctx,x,y,r,color){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();}
+
+function drawVBAtual(ctx,blink,step,armsUp){
+  const w=96,h=96;
+  ctx.clearRect(0,0,w,h);
+  ctx.lineJoin="round"; ctx.lineCap="round";
+  ctx.save(); ctx.translate(0,6);
+  const NAVY="#16233e", NAVY2="#26365a", OUT="#101a30";
+  function white(x0,y0,x1,y1){const g=ctx.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,"#ffffff");g.addColorStop(0.55,"#e6edf7");g.addColorStop(1,"#b4c4dc");return g;}
+
+  const LIFT=8, STRIDE=3;
+  let lTop=70, rTop=70, lDX=0, rDX=0;
+  if(step===0){ lTop=70-LIFT; lDX=STRIDE; rDX=-STRIDE; }
+  else if(step===1){ rTop=70-LIFT; rDX=STRIDE; lDX=-STRIDE; }
+  function leg(cx,top){
+    rrVan(ctx,cx-5,top,10,11,4.5); ctx.fillStyle=white(cx-5,top,cx+5,top); ctx.fill();
+    ctx.lineWidth=2.6; ctx.strokeStyle=OUT; ctx.stroke();
+    const fy=top+9;
+    rrVan(ctx,cx-6.5,fy,13,9,4); ctx.fillStyle=NAVY; ctx.fill();
+    ctx.lineWidth=2.6; ctx.strokeStyle=OUT; ctx.stroke();
+    rrVan(ctx,cx-6.5,fy+2,13,2.4,1.2); ctx.fillStyle="rgba(255,255,255,0.85)"; ctx.fill();
+    cfVan(ctx,cx-2.5,fy+4.5,1.4,"rgba(255,255,255,0.5)");
+  }
+  leg(41+lDX,lTop); leg(55+rDX,rTop);
+
+  const ARM_SWING = 0.24;
+  const JUMP_RAISE = 2.9;
+  let lArmSwing = 0, rArmSwing = 0;
+  if(armsUp){ lArmSwing = JUMP_RAISE; rArmSwing = -JUMP_RAISE; }
+  else if(step===0){ lArmSwing=-ARM_SWING; rArmSwing=ARM_SWING; }
+  else if(step===1){ lArmSwing=ARM_SWING; rArmSwing=-ARM_SWING; }
+  function arm(sx,swing){
+    ctx.save();
+    const px=sx+4.5, py=52;
+    ctx.translate(px,py); ctx.rotate(swing); ctx.translate(-px,-py);
+    rrVan(ctx,sx,52,9,13,4.5); ctx.fillStyle=white(sx,52,sx+9,52); ctx.fill();
+    ctx.lineWidth=2.6; ctx.strokeStyle=OUT; ctx.stroke();
+    const hx=sx+4.5, hy=67;
+    cfVan(ctx,hx,hy,5,NAVY);
+    ctx.lineWidth=2.3; ctx.strokeStyle=OUT; ctx.beginPath(); ctx.arc(hx,hy,5,0,Math.PI*2); ctx.stroke();
+    cfVan(ctx,hx-2,hy+1.6,1.4,NAVY2); cfVan(ctx,hx+0.5,hy+2.4,1.4,NAVY2); cfVan(ctx,hx+2.5,hy+1.6,1.4,NAVY2);
+    ctx.restore();
+  }
+  arm(17,lArmSwing); arm(70,rArmSwing);
+
+  rrVan(ctx,26,44,44,32,15); ctx.fillStyle=white(28,46,68,46); ctx.fill();
+  ctx.save(); rrVan(ctx,26,44,44,32,15); ctx.clip();
+  const wg=ctx.createLinearGradient(0,64,0,76); wg.addColorStop(0,"rgba(22,35,62,0)"); wg.addColorStop(0.4,"#1c2c4c"); wg.addColorStop(1,"#142038");
+  ctx.fillStyle=wg; ctx.fillRect(26,62,44,16);
+  ctx.strokeStyle="rgba(16,26,48,0.6)"; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(28,64); ctx.lineTo(68,64); ctx.stroke();
+  ctx.fillStyle="rgba(255,255,255,0.5)"; ctx.beginPath(); ctx.ellipse(36,52,9,5.5,-0.5,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+  ctx.lineWidth=3; ctx.strokeStyle=OUT; rrVan(ctx,26,44,44,32,15); ctx.stroke();
+
+  cfVan(ctx,48,56,8,NAVY);
+  ctx.lineWidth=2.5; ctx.strokeStyle=OUT; ctx.beginPath(); ctx.arc(48,56,8,0,Math.PI*2); ctx.stroke();
+  const dome=ctx.createRadialGradient(45.5,53.5,1,48,56,7); dome.addColorStop(0,"#aebccf"); dome.addColorStop(0.6,"#5a6a85"); dome.addColorStop(1,"#2b3a57");
+  ctx.fillStyle=dome; ctx.beginPath(); ctx.arc(48,56,5.7,0,Math.PI*2); ctx.fill();
+  cfVan(ctx,46,53.8,1.5,"rgba(255,255,255,0.85)");
+
+  function pod(cx){
+    cfVan(ctx,cx,32,6,NAVY);
+    ctx.lineWidth=2.3; ctx.strokeStyle=OUT; ctx.beginPath(); ctx.arc(cx,32,6,0,Math.PI*2); ctx.stroke();
+    cfVan(ctx,cx,32,2.8,NAVY2); cfVan(ctx,cx-0.8,31,1,"rgba(255,255,255,0.6)");
+  }
+  pod(25); pod(71);
+
+  ctx.fillStyle=NAVY; ctx.beginPath(); ctx.moveTo(45,16); ctx.lineTo(51,16); ctx.lineTo(49.2,8); ctx.lineTo(46.8,8); ctx.closePath(); ctx.fill();
+  const halo=ctx.createRadialGradient(48,5,1,48,5,11); halo.addColorStop(0,"rgba(90,200,255,0.55)"); halo.addColorStop(1,"rgba(90,200,255,0)");
+  ctx.fillStyle=halo; ctx.beginPath(); ctx.arc(48,5,11,0,Math.PI*2); ctx.fill();
+  const bg=ctx.createRadialGradient(46.3,3.5,0.5,48,5,5.5); bg.addColorStop(0,"#e6f7ff"); bg.addColorStop(0.4,"#48b4ff"); bg.addColorStop(1,"#1670d8");
+  ctx.fillStyle=bg; ctx.beginPath(); ctx.arc(48,5,5.5,0,Math.PI*2); ctx.fill();
+  cfVan(ctx,46.2,3.4,1.6,"#ffffff");
+
+  rrVan(ctx,26,14,44,34,17); ctx.fillStyle=white(28,15,68,15); ctx.fill();
+  ctx.lineWidth=3; ctx.strokeStyle=OUT; ctx.stroke();
+  ctx.save(); rrVan(ctx,26,14,44,34,17); ctx.clip();
+  ctx.fillStyle="rgba(255,255,255,0.6)"; ctx.beginPath(); ctx.ellipse(38,19,10,4,-0.5,0,Math.PI*2); ctx.fill(); ctx.restore();
+
+  rrVan(ctx,30,20,36,23,12); ctx.fillStyle=NAVY; ctx.fill();
+  rrVan(ctx,32.5,22,31,19,10);
+  const vg=ctx.createLinearGradient(0,22,0,41); vg.addColorStop(0,"#7fd4ff"); vg.addColorStop(0.5,"#2a9bf0"); vg.addColorStop(1,"#1366c6");
+  ctx.fillStyle=vg; ctx.fill();
+  ctx.save(); rrVan(ctx,32.5,22,31,19,10); ctx.clip();
+  ctx.fillStyle="rgba(255,255,255,0.45)"; ctx.beginPath(); ctx.ellipse(42,25,9,3.5,-0.4,0,Math.PI*2); ctx.fill(); ctx.restore();
+
+  if(!blink){
+    ctx.fillStyle="#0a0f1c";
+    ctx.beginPath(); ctx.ellipse(41,30,3.3,4,0,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(55,30,3.3,4,0,0,Math.PI*2); ctx.fill();
+    cfVan(ctx,42.3,28.4,1.5,"#fff"); cfVan(ctx,39.9,31,0.8,"#fff");
+    cfVan(ctx,56.3,28.4,1.5,"#fff"); cfVan(ctx,53.9,31,0.8,"#fff");
+  } else if(blink==="wink"){
+    ctx.fillStyle="#0a0f1c";
+    ctx.beginPath(); ctx.ellipse(41,30,3.3,4,0,0,Math.PI*2); ctx.fill();
+    cfVan(ctx,42.3,28.4,1.5,"#fff"); cfVan(ctx,39.9,31,0.8,"#fff");
+    ctx.lineWidth=3; ctx.strokeStyle="#0a0f1c"; ctx.lineCap="round";
+    ctx.beginPath(); ctx.arc(55,31,3.5,0.15*Math.PI,0.85*Math.PI); ctx.stroke();
+  } else if(blink==="happy"){
+    ctx.lineWidth=3.2; ctx.strokeStyle="#0a0f1c"; ctx.lineCap="round";
+    ctx.beginPath(); ctx.arc(41,31,3.9,0.10*Math.PI,0.90*Math.PI); ctx.stroke();
+    ctx.beginPath(); ctx.arc(55,31,3.9,0.10*Math.PI,0.90*Math.PI); ctx.stroke();
+    cfVan(ctx,33.5,35.5,3,"rgba(255,120,120,0.55)");
+    cfVan(ctx,62.5,35.5,3,"rgba(255,120,120,0.55)");
+  } else if(blink==="sad"){
+    ctx.strokeStyle="#0a0f1c"; ctx.lineWidth=2.3; ctx.lineCap="round";
+    ctx.beginPath(); ctx.moveTo(37,24); ctx.lineTo(44.5,27); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(59,24); ctx.lineTo(51.5,27); ctx.stroke();
+    ctx.fillStyle="#0a0f1c";
+    ctx.beginPath(); ctx.ellipse(41,32,2.8,3.1,0,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(55,32,2.8,3.1,0,0,Math.PI*2); ctx.fill();
+    cfVan(ctx,42,30.7,1.1,"#fff"); cfVan(ctx,56,30.7,1.1,"#fff");
+    ctx.fillStyle="#6fd0ff";
+    ctx.beginPath();
+    ctx.moveTo(56,35); ctx.quadraticCurveTo(59,40,56,43.5); ctx.quadraticCurveTo(53,40,56,35);
+    ctx.closePath(); ctx.fill();
+  } else {
+    ctx.lineWidth=3; ctx.strokeStyle="#0a0f1c";
+    ctx.beginPath(); ctx.arc(41,31,3.5,0.15*Math.PI,0.85*Math.PI); ctx.stroke();
+    ctx.beginPath(); ctx.arc(55,31,3.5,0.15*Math.PI,0.85*Math.PI); ctx.stroke();
+  }
+  ctx.fillStyle="#0a0f1c";
+  if(blink==="wink"){
+    ctx.beginPath(); ctx.ellipse(48,36,5.6,3.6,0,0,Math.PI); ctx.fill();
+    ctx.fillStyle="#ff7a7a";
+    ctx.beginPath(); ctx.ellipse(48,37.6,2.9,1.7,0,0,Math.PI); ctx.fill();
+  } else if(blink==="happy"){
+    ctx.beginPath(); ctx.ellipse(48,36,6.2,4.2,0,0,Math.PI); ctx.fill();
+    ctx.fillStyle="#ff7a7a";
+    ctx.beginPath(); ctx.ellipse(48,38,3.2,1.9,0,0,Math.PI); ctx.fill();
+  } else if(blink==="sad"){
+    ctx.strokeStyle="#0a0f1c"; ctx.lineWidth=2.4; ctx.lineCap="round";
+    ctx.beginPath(); ctx.arc(48,40,4.2,Math.PI,Math.PI*2); ctx.stroke();
+  } else {
+    ctx.beginPath(); ctx.ellipse(48,36,4.6,3.2,0,0,Math.PI); ctx.fill();
+    ctx.fillStyle="#ff7a7a";
+    ctx.beginPath(); ctx.ellipse(48,37.4,2.4,1.5,0,0,Math.PI); ctx.fill();
+  }
+  ctx.restore();
+}
+
+
+
+const CV=['fvb'].map(i=>{const c=$(i),x=c.getContext('2d'),D=Math.min(devicePixelRatio||1,3);c.width=c.height=96*D;x.scale(D,D);return x});
+const draw=(b,s,a)=>CV.forEach(x=>drawVBAtual(x,b,s,a));
+let tok=0,quiet=0,bt=null;
+function play(fr){const t=++tok;let i=0;(function n(){if(t!==tok)return;if(i>=fr.length){draw(false,-1,false);return}const f=fr[i++];draw(f[0],f[1],f[2]);setTimeout(n,f[3])})()}
+function bub(t){const b=$('fbub');b.textContent=t;b.classList.add('show');clearTimeout(bt);bt=setTimeout(()=>b.classList.remove('show'),3500)}
+function robot(m){quiet=Date.now()+2500;
+  [$('fvb')].forEach(e=>{e.classList.remove('glow','shake','dance');void e.offsetWidth;e.classList.add(m);setTimeout(()=>e.classList.remove(m),900)});
+  play(m==='glow'?[['happy',-1,true,800]]:m==='shake'?[['sad',-1,false,1300]]:[['wink',0,false,180],['happy',1,true,180],['happy',0,true,180],['happy',1,true,180],['wink',-1,true,500]])}
+draw(false,-1,false);
+const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+setInterval(()=>{if(document.hidden||REDUCED||Date.now()<quiet)return;const r=Math.random();
+  r<.3?play([['happy',-1,true,500]]):r<.6?play([[false,0,false,170],[false,1,false,170],[false,0,false,170],[false,1,false,170]]):play([[true,-1,false,180]])},3600);
+const hint=()=>{const m=curM;robot('glow');bub(m?(m.h||m.d||m.f):'Olá!')};
+let drag=null,mv=0;const FW=$('fw');
+FW.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,l:FW.offsetLeft,t:FW.offsetTop};mv=0;FW.setPointerCapture(e.pointerId)});
+FW.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;mv=Math.max(mv,Math.abs(dx)+Math.abs(dy));
+  if(mv>6){FW.style.right=FW.style.bottom='auto';FW.style.left=Math.min(innerWidth-FW.offsetWidth,Math.max(0,drag.l+dx))+'px';FW.style.top=Math.min(innerHeight-FW.offsetHeight,Math.max(0,drag.t+dy))+'px'}});
+FW.addEventListener('pointerup',()=>{drag=null;if(mv<=6)hint()});
+$('fvb').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hint()}};
+
+/* ===== Pontuação e feedback ===== */
+let ok=0,bad=0,cur=0,pts=0,streak=0,name='',lvl='n',tmr=null,curM=null,MD=[];const errs=[];
+const PR=['Muito bem!','Boa!','Excelente!','Isso mesmo!','Estás a arrasar!'];
+const upd=()=>{$('c').textContent=ok;$('w').textContent=bad;$('p').textContent=pts;$('sk').textContent=streak;$('st').style.display=streak>=3?'inline-block':'none'};
+const fb=(t,c)=>{$('fb').textContent=t||'';$('fb').className=c||''};
+function track(g){const m=curM;if(!m||m.r==null)return;const q=RES[m.r]=RES[m.r]||{ok:0,t:0};if(!m.tried){m.tried=1;q.t++;if(g)q.ok++}}
+function right(x){track(1);streak++;const g=(10+(streak>=3?5:0))*(lvl==='d'?2:1);pts+=g;ok++;upd();const p=PR[Math.floor(Math.random()*PR.length)];
+  fb(`${p} ⭐ +${g}`+(streak>=3?` 🔥 Sequência de ${streak}!`:'')+(x?' '+x:''),'ok');beep(SND.ok);say(p);bub(p+(name?' '+name:''));robot(streak>=3?'dance':'glow')}
+function wrong(d){track(0);errs[cur]=(errs[cur]||0)+1;streak=0;bad++;upd();const dd=lvl==='f'&&d?d:'Pensa lá outra vez…';fb(dd,'err');beep(SND.err);say('Pensa lá outra vez.');bub(dd);robot('shake')}
+function timer(){clearInterval(tmr);const t=$('tm');if(lvl!=='d'){t.style.display='none';return}let n=60;t.style.display='inline-block';t.textContent='⏱ '+n;
+  tmr=setInterval(()=>{n--;t.textContent='⏱ '+n;if(n<=0){clearInterval(tmr);wrong('Tempo esgotado!');fb('Tempo esgotado! ⏱','err');setTimeout(()=>cur+1<M.length?start(cur+1):final(),900)}},1000)}
+const flash=(b,c)=>{b.classList.add(c);setTimeout(()=>b.classList.remove(c),600)};
+
+/* ===== Missões (dados) ===== */
+const RULES = [
+    { e: "👋", n: "Cumprimentar os colegas e professores", d: "começar o dia com amizade e respeito.", c: "#ff6b2c" },
+    { e: "😊", n: "Ser simpático com todos",               d: "evitar conflitos e ajudar quem precisa.", c: "#e395c0" },
+    { e: "🎒", n: "Vir preparado para aprender",           d: "trazer cadernos, lápis e muita vontade.", c: "#8c96ff" },
+    { e: "✋", n: "Levantar a mão para partilhar ideias",  d: "todos merecem ser ouvidos.", c: "#c3fb6d" },
+    { e: "🧹", n: "Manter a sala e o recreio limpos",      d: "não deixar lixo no chão.", c: "#0399b5" },
+    { e: "💻", n: "Usar computadores e tablets de forma responsável", d: "seguir as instruções da professora.", c: "#ffdd2d" },
+    { e: "🤝", n: "Ajudar os colegas",                     d: "partilhar ideias e colaborar nos trabalhos de grupo, porque juntos aprendemos mais.", c: "#7ed957" },
+    { e: "⏰", n: "Chegar a horas",                        d: "cumprir horários e tarefas.", c: "#0bc1e0" },
+    { e: "📣", n: "Ser honesto e pedir ajuda quando preciso", d: "a verdade torna-nos mais fortes.", c: "#1a0da8", dark: true }
+];
+
+/* r = índice da regra; right = resposta certa; wrong = duas erradas */
 const questionsData = [
-    {
-        text: "Um colega chega de manhã à sala. O que fazes?",
-        options: [
-            "Cumprimentas com um sorriso.",
-            "Virar a cara para o lado.",
-            "Fingir que não o vês."
-        ],
-        correct: 0
-    },
-    {
-        text: "A professora está a explicar e tu queres falar. O que deves fazer?",
-        options: [
-            "Levantar a mão e esperar a tua vez.",
-            "Começar a falar por cima.",
-            "Fazer barulho para chamar atenção."
-        ],
-        correct: 0
-    },
-    {
-        text: "Um colega deixa cair os lápis no chão. O que faz um bom colega?",
-        options: [
-            "Ajudar a apanhar os lápis.",
-            "Rir-se dele.",
-            "Ignorar e continuar."
-        ],
-        correct: 0
-    },
-    {
-        text: "Chegas à sala e vês lixo no chão. O que fazes?",
-        options: [
-            "Apanhas e colocas no caixote do lixo.",
-            "Empurras com o pé.",
-            "Finges que não é contigo."
-        ],
-        correct: 0
-    },
-    {
-        text: "Uma colega nova chegou à turma. O que fazes?",
-        options: [
-            "Recebes com um sorriso e dizes olá.",
-            "Ignoras a colega nova.",
-            "Fazes uma piada sobre ela."
-        ],
-        correct: 0
-    },
-    {
-        text: "Um colega está triste no recreio. O que faz um bom colega?",
-        options: [
-            "Perguntar se precisa de ajuda.",
-            "Dizer “isso não é problema meu”.",
-            "Rir-se da cara dele."
-        ],
-        correct: 0
-    },
-    {
-        text: "Estás num trabalho de grupo. Como age um bom colega?",
-        options: [
-            "Partilha ideias e ouve os outros.",
-            "Querer mandar em tudo sozinho.",
-            "Não deixar ninguém falar."
-        ],
-        correct: 0
-    },
-    {
-        text: "Estás a fazer barulho e a professora pede silêncio. O que fazes?",
-        options: [
-            "Paras de falar e ficas atento.",
-            "Continuas a falar.",
-            "Resmungas e fazes ainda mais barulho."
-        ],
-        correct: 0
-    },
-    {
-        text: "Um colega pede um lápis emprestado porque o dele partiu. O que fazes?",
-        options: [
-            "Emprestas, se puderes.",
-            "Dizes “não” só para chatear.",
-            "Gozas porque ele não tem lápis."
-        ],
-        correct: 0
-    },
-    {
-        text: "Tens um erro no caderno. Como reage um bom colega consigo próprio?",
-        options: [
-            "Pede ajuda com calma para corrigir.",
-            "Atira o caderno com raiva.",
-            "Culpa os colegas pelo erro."
-        ],
-        correct: 0
-    },
-    {
-        text: "A professora pede para arrumar o computador ou tablet. O que fazes?",
-        options: [
-            "Arrumas com cuidado, como te ensinaram.",
-            "Fechas à pressa e deixas tudo desarrumado.",
-            "Dizes que não foste tu que usaste."
-        ],
-        correct: 0
-    },
-    {
-        text: "Um colega fala contigo enquanto trabalhas. O que fazes?",
-        options: [
-            "Dizes que depois falam, porque agora estás a trabalhar.",
-            "Começas uma conversa longa no meio da aula.",
-            "Ignoras e ficas irritado com ele."
-        ],
-        correct: 0
-    },
-    {
-        text: "Queres brincar com o brinquedo de um colega. O que fazes?",
-        options: [
-            "Pedes com educação para brincar também.",
-            "Tiras o brinquedo da mão do colega.",
-            "Se ele diz não, ficas muito zangado."
-        ],
-        correct: 0
-    },
-    {
-        text: "Tens de partilhar materiais em grupo. O que faz um bom colega?",
-        options: [
-            "Usa e depois passa aos outros.",
-            "Guarda tudo só para si.",
-            "Esconde os materiais para ninguém usar."
-        ],
-        correct: 0
-    },
-    {
-        text: "Um colega comete um erro numa actividade. Como és um bom colega?",
-        options: [
-            "Ajudas e dizes que está tudo bem, todos erram.",
-            "Gozas com ele à frente da turma.",
-            "Gritas que ele errou."
-        ],
-        correct: 0
-    }
+    { r: 0, text: "Um colega chega de manhã à sala. O que fazes?",
+      right: "Cumprimentas com um sorriso.",
+      wrong: ["Viras a cara para o lado.", "Finges que não o vês."] },
+    { r: 0, text: "Entras na sala e a professora já lá está. O que fazes?",
+      right: "Dizes “Bom dia, professora!”.",
+      wrong: ["Entras sem dizer nada e vais logo para o lugar.", "Resmungas porque preferias estar em casa."] },
+
+    { r: 1, text: "Dois colegas começam a discutir por causa de um jogo. O que faz um bom colega?",
+      right: "Ajuda a acalmar e sugere que partilhem o jogo.",
+      wrong: ["Põe-se do lado de um e grita com o outro.", "Incentiva a discussão para ver quem ganha."] },
+    { r: 1, text: "Um colega está triste no recreio. O que faz um bom colega?",
+      right: "Pergunta se precisa de ajuda.",
+      wrong: ["Diz “isso não é problema meu”.", "Ri-se da cara dele."] },
+
+    { r: 2, text: "Amanhã há aula de Português. O que fazes antes de ir para a escola?",
+      right: "Verificas se tens o caderno, o lápis e o material todo.",
+      wrong: ["Deixas para ver quando chegares à escola.", "Pedes sempre o material aos colegas."] },
+    { r: 2, text: "A professora começa uma atividade nova. Como age um bom colega?",
+      right: "Está atento e com vontade de aprender.",
+      wrong: ["Diz logo que é muito difícil, sem tentar.", "Distrai-se a desenhar na mesa."] },
+
+    { r: 3, text: "A professora está a explicar e tu queres falar. O que deves fazer?",
+      right: "Levantar a mão e esperar a tua vez.",
+      wrong: ["Começar a falar por cima.", "Fazer barulho para chamar a atenção."] },
+    { r: 3, text: "Um colega está a contar uma ideia e tu tens outra. O que fazes?",
+      right: "Esperas que ele acabe e levantas a mão.",
+      wrong: ["Interrompes e dizes que a ideia dele é má.", "Ris-te da ideia dele."] },
+
+    { r: 4, text: "Chegas à sala e vês lixo no chão. O que fazes?",
+      right: "Apanhas e colocas no caixote do lixo.",
+      wrong: ["Empurras com o pé.", "Finges que não é contigo."] },
+    { r: 4, text: "Acabaste o lanche no recreio e tens a embalagem na mão. O que fazes?",
+      right: "Deitas no caixote do lixo.",
+      wrong: ["Deixas debaixo do banco.", "Atiras para o chão, alguém há de apanhar."] },
+
+    { r: 5, text: "A professora pede para arrumar o computador ou o tablet. O que fazes?",
+      right: "Arrumas com cuidado, como te ensinaram.",
+      wrong: ["Fechas à pressa e deixas tudo desarrumado.", "Dizes que não foste tu que usaste."] },
+    { r: 5, text: "A professora diz para usares o tablet só para a atividade. O que fazes?",
+      right: "Usas só para a atividade, como foi pedido.",
+      wrong: ["Abres jogos às escondidas.", "Mexes nos tablets dos colegas sem pedir."] },
+
+    { r: 6, text: "Estás num trabalho de grupo. Como age um bom colega?",
+      right: "Partilha ideias e ouve os outros.",
+      wrong: ["Quer mandar em tudo sozinho.", "Não deixa ninguém falar."] },
+    { r: 6, text: "Um colega comete um erro numa atividade. Como és um bom colega?",
+      right: "Ajudas e dizes que está tudo bem, todos erram.",
+      wrong: ["Gozas com ele à frente da turma.", "Gritas que ele errou."] },
+
+    { r: 7, text: "A aula começa às 9h. O que faz um bom colega?",
+      right: "Chega a horas e já com tudo pronto.",
+      wrong: ["Chega sempre depois do toque.", "Fica a brincar no recreio depois do toque."] },
+    { r: 7, text: "Tens de entregar um trabalho até sexta-feira. O que fazes?",
+      right: "Fazes com tempo e entregas no prazo.",
+      wrong: ["Deixas para a última hora e não entregas.", "Inventas uma desculpa em vez de fazer o trabalho."] },
+
+    { r: 8, text: "Partiste sem querer o lápis de um colega. O que fazes?",
+      right: "Contas a verdade e pedes desculpa.",
+      wrong: ["Escondes o lápis e finges que não sabes.", "Dizes que foi outro colega."] },
+    { r: 8, text: "Não percebeste a matéria. O que faz um bom colega?",
+      right: "Pede ajuda à professora.",
+      wrong: ["Finge que percebeu.", "Copia do colega sem perceber."] }
 ];
 
-/* ------------------ DOM ------------------- */
-const questionTextEl = document.getElementById("question-text");
-const questionCounterEl = document.getElementById("question-counter");
-const feedbackEl = document.getElementById("feedback");
-const scoreEl = document.getElementById("score");
-const finalEl = document.getElementById("final");
-const progressFill = document.getElementById("progress-fill");
 
-const optionButtons = [
-    document.getElementById("opt0"),
-    document.getElementById("opt1"),
-    document.getElementById("opt2")
-];
-
-const vbRobot = document.getElementById("vb-robot");
-
-/* ------------------ ÁUDIO ------------------- */
-let audioCtx = null;
-
-function initAudio() {
-    if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
+let M=[],RES={};
+function build(){
+  const byRule=RULES.map((_,r)=>questionsData.filter(q=>q.r===r));
+  let ch=byRule.map(l=>l[Math.floor(Math.random()*l.length)]);
+  ch=shuf(ch.concat(shuf(questionsData.filter(q=>!ch.includes(q))).slice(0,2)));
+  const Q=ch.map(q=>{const R=RULES[q.r];return{z:'Na escola',t:'O que fazes?',f:q.text,k:'single',c:R.c,r:q.r,
+    h:'Pensa no que um bom colega faria: respeita, ajuda e diz a verdade.',o:[[q.right,1],...q.wrong.map(w=>[w])],d:'Do cartaz: '+R.n+' – '+R.d}});
+  const rights=shuf(questionsData.map(q=>q.right)),wrongs=shuf(questionsData.flatMap(q=>q.wrong));
+  const triage={z:'Cartaz da turma',t:'Bom colega ou não?',f:'Arrasta cada atitude para o sítio certo.',k:'match',c:'#0f766e',A:'Atitudes',B:'Onde fica?',
+    items:[...rights.slice(0,3).map(t=>[t,'g']),...wrongs.slice(0,3).map(t=>[t,'b'])],targets:[['✅ Bom colega',['g']],['❌ Tenho de melhorar',['b']]]};
+  const judge={z:'Recreio',t:'Bom exemplo ou mau exemplo?',f:'Lê cada atitude e decide se é de um bom colega.',k:'judge',c:'#e395c0',lab:['👍 Bom colega','👎 Mau exemplo'],
+    s:shuf([...rights.slice(3,6).map(t=>[t,1]),...wrongs.slice(3,6).map(t=>[t,0])])};
+  const order={z:'O teu dia na escola',t:'Ordena o dia de um bom colega',f:'Clica nos passos pela ordem certa, desde que chegas à escola!',k:'order',c:'#0bc1e0',
+    steps:['Chegar a horas à escola','Cumprimentar os colegas e a professora','Preparar o material da aula','Levantar a mão para falar','Deitar o lixo no caixote antes de sair'],
+    d:'Chegas a horas, cumprimentas, preparas o material, participas e deixas tudo limpo.'};
+  M=[...Q.slice(0,4),triage,...Q.slice(4,8),judge,...Q.slice(8),order];
 }
 
-function playTone(freq, time, duration, type = "square", vol = 0.25) {
-    if (!audioCtx) return;
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = type;
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + time);
-    gain.gain.setValueAtTime(vol, audioCtx.currentTime + time);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start(audioCtx.currentTime + time);
-    osc.stop(audioCtx.currentTime + time + duration);
-}
+/* ===== Motores ===== */
+const next=$('next');
+function panel(t){const p=el('div','panel');p.append(el('div','pt',t));const r=el('div','row');p.append(r);p.r=r;return p}
+const ENG={
+ match(m,box,done){
+  let sel=null,left=m.items.length;const A=panel(m.A),B=panel(m.B),cols=el('div','cols');B.classList.add('sticky');
+  const clr=()=>box.querySelectorAll('.it').forEach(x=>x.classList.remove('selected'));
+  const offOver=()=>box.querySelectorAll('.tgt').forEach(x=>x.classList.remove('over'));
+  const under=e=>{const x=document.elementFromPoint(e.clientX,e.clientY);return x&&x.closest('.tgt')};
+  const place=(t,b,tb)=>{if(tb.ok.includes(t)){right();const c=el('span','chip',b.textContent);tb.querySelector('.in').append(c);b.remove();if(!--left)done()}else{wrong();flash(tb,'wrong')}};
+  m.targets.forEach(([l,ok_])=>{const b=el('button','tag tgt');b.append(el('span','lab',l),el('div','in'));b.ok=ok_;b.onclick=()=>{
+    if(!sel){fb('Arrasta um cartão para aqui.','err');return}
+    place(sel.t,sel.b,b);sel=null;clr()};B.r.append(b)});
+  shuf(m.items).forEach(([l,t])=>{const b=el('button','tag it',l);let st=null,g=null,moved=false;
+    b.onclick=()=>{if(moved||b.classList.contains('disabled'))return;clr();b.classList.add('selected');sel={t,b};fb('')};
+    b.onpointerdown=e=>{if(b.classList.contains('disabled'))return;st={x:e.clientX,y:e.clientY};moved=false;b.setPointerCapture(e.pointerId)};
+    b.onpointermove=e=>{if(!st)return;
+      if(!g&&Math.hypot(e.clientX-st.x,e.clientY-st.y)>8){moved=true;g=b.cloneNode(true);g.className='tag ghost';document.body.append(g);b.classList.add('dragging');clr();sel=null}
+      if(g){g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';offOver();const tb=under(e);if(tb)tb.classList.add('over')}};
+    const end=e=>{if(!st)return;st=null;if(g){const tb=e.type==='pointerup'?under(e):null;g.remove();g=null;b.classList.remove('dragging');offOver();if(tb)place(t,b,tb);setTimeout(()=>moved=false,60)}};
+    b.onpointerup=end;b.onpointercancel=end;A.r.append(b)});
+  cols.append(A,B);box.append(cols)},
+ order(m,box,done){let i=0;const p=panel('Clica pela ordem certa:');
+  shuf(m.steps.map((t,k)=>[t,k])).forEach(([t,k])=>{const b=el('button','tag',t);b.onclick=()=>{if(b.classList.contains('disabled'))return;
+    if(k===i){right();b.classList.add('correct','disabled');b.textContent=(i+1)+'. '+t;if(++i===m.steps.length)done()}else{wrong(m.d);flash(b,'wrong')}};p.r.append(b)});
+  box.append(p)},
+ single(m,box,done){
+  const p=panel('');let fin=false;
+  shuf(m.o).forEach(([l,c])=>{const b=el('button','tag',l);b.onclick=()=>{if(fin)return;
+    if(c){fin=true;right(m.d);b.classList.add('correct');p.querySelectorAll('.tag').forEach(x=>x.classList.add('disabled'));done()}
+    else{wrong(m.d);flash(b,'wrong')}};p.r.append(b)});
+  box.append(p)},
+ judge(m,box,done){
+  let n=0;const p=el('div','panel');
+  m.s.forEach(([txt,safe],i)=>{const d=el('div','stmt'),r=el('div','row');d.append(el('div','',(i+1)+'. '+txt));
+    const LB=m.lab||['Seguro','Perigoso'];const bs=[[LB[0],1],[LB[1],0]].map(([l,v])=>{const b=el('button','tag',l);b.onclick=()=>{
+      if(bs[0].classList.contains('disabled'))return;
+      if(v===safe){right();b.classList.add('correct')}else{wrong();b.classList.add('wrong')}
+      bs.forEach(x=>x.classList.add('disabled'));if(++n===m.s.length)done()};r.append(b);return b});
+    d.append(r);p.append(d)});
+  box.append(p)},
+ pick(m,box,done){
+  let n=0;const tot=m.p.filter(x=>x[1]).length,g=el('div','grid');
+  shuf(m.p).forEach(([l,safe])=>{const b=el('button','tag',l);b.onclick=()=>{if(b.classList.contains('correct'))return;
+    if(safe){b.classList.add('correct');right();if(++n===tot)done()}else{wrong('Isso é perigoso! Cuidado.');flash(b,'wrong')}};g.append(b)});
+  box.append(g)}
+};
 
-function soundCorrect() {
-    initAudio();
-    playTone(900, 0,   0.10);
-    playTone(1200,0.10,0.10);
-    playTone(1500,0.20,0.12);
-}
+function start(i){
+  cur=i;const base=M[i];let m=Object.assign({},base);
+  if(base.v)Object.assign(m,base.v[Math.floor(Math.random()*base.v.length)]);
+  if(base.k==='judge')m.s=shuf(base.pool).slice(0,6);
+  if(base.k==='pick'){const sf=base.pool.filter(x=>x[1]),dg=base.pool.filter(x=>!x[1]);m.p=[...shuf(sf).slice(0,4),...shuf(dg).slice(0,4)]}
+  curM=m;
+  if(m.c){document.body.className='';document.body.style.background=`radial-gradient(circle at top,${m.c},#0f172a 72%)`}else{document.body.style.background='';document.body.className='s'+(i%8)}
+  $('prog').textContent=`Missão ${i+1} de ${M.length}`;
+  $('fill').style.width=(i/M.length*100)+'%';
+  $('zone').textContent=m.z;$('title').textContent=`Missão ${i+1} – ${m.t}`;$('fala').textContent=m.f;
+  $('mission').replaceWith(Object.assign(el('div'),{id:'mission'}));
+  fb('');next.style.display='none';$('again').style.display=$('dip').style.display='none';
+  ENG[m.k](m,$('mission'),()=>{clearInterval(tmr);$('tm').style.display='none';
+    next.textContent=i===M.length-1?'Ver resultado final →':'Próxima missão →';next.style.display='inline-block'});
+  timer();say(m.f)}
 
-function soundWrong() {
-    initAudio();
-    playTone(260, 0,   0.16, "square", 0.3);
-    playTone(180, 0.16,0.18, "square", 0.3);
-}
+next.onclick=()=>{clearInterval(tmr);beep(SND.next);cur+1<M.length?start(cur+1):final()};
+$('dip').onclick=()=>{const d=el('div');d.id='dipl';
+  d.innerHTML=`<div class="dp"><div class="dpb">${MD[0]}</div><h2>Diploma de Bom Colega</h2><p>Certifica-se que</p><h1></h1><p>concluiu o jogo <b>Como ser um bom colega</b> e mostrou saber as regras da turma: respeito, ajuda, honestidade e responsabilidade.</p><p>⭐ ${pts} pontos · ${MD[1]} · ${new Date().toLocaleDateString('pt-PT')}</p><p class="sig">© Prof.ª Vanda Várzea</p><div class="np"><button class="btn" id="pr">🖨️ Imprimir / Guardar PDF</button><button class="btn" id="cl">Fechar</button></div></div>`;
+  d.querySelector('h1').textContent=name;document.body.append(d);$('pr').onclick=()=>print();$('cl').onclick=()=>d.remove()};
+$('again').onclick=()=>{ok=bad=pts=streak=0;errs.length=0;RES={};build();upd();start(0)};
 
-function soundWin() {
-    initAudio();
-    playTone(700, 0,    0.16);
-    playTone(900, 0.18, 0.16);
-    playTone(1100,0.36, 0.20);
-    playTone(1400,0.60, 0.24);
-}
+/* ===== Final ===== */
+function final(){
+  document.body.style.background='';document.body.className='sf';next.style.display='none';
+  $('fill').style.width='100%';$('prog').textContent='Missões concluídas';
+  let e='🥉',t='Medalha de Bronze',x='Bom esforço! Estás a aprender e isso é fantástico.';
+  if(bad<=4){e='🥇';t='Medalha de Ouro';x='Excelente trabalho! És um ótimo colega!'}
+  else if(bad<=10){e='🥈';t='Medalha de Prata';x='Muito bem! Faltou só um bocadinho para o ouro.'}
+  $('zone').textContent='Parabéns!';$('title').textContent='⭐ Parabéns, '+name+'! ⭐';
+  $('fala').textContent='Obrigado por jogares comigo! Juntos fazemos uma turma melhor.';
+  MD=[e,t];let best=0,rec=false;try{best=+localStorage.getItem('vbcolega')||0;if(pts>best){localStorage.setItem('vbcolega',pts);rec=best>0;best=pts}}catch(e){}
+  const rv=[...new Set(M.filter((_,k)=>errs[k]).map(m=>m.r!=null?RULES[m.r].n:m.t))];
+  const ch=RULES.map((r,k)=>{const q=RES[k];return q?`<span class="chip2" style="background:${r.c};color:${r.dark?'#fff':'#1b1b1b'}">${r.e} ${r.n} ${q.ok===q.t?'✔':'↻'} ${q.ok}/${q.t}</span>`:''}).join('');
+  const m=$('mission');m.innerHTML=`<div class="final"><div class="big">${e}</div><b>${t}</b><p>⭐ <b>${pts}</b> pontos${rec?' – novo recorde! 🏆':best?' (melhor: '+best+')':''}<br>✔ Certo: <b>${ok}</b> &nbsp; ✘ Errado: <b>${bad}</b></p><p>${x}</p>${rv.length?'<div class="rev"><b>Para rever:</b> '+rv.join(', ')+'</div>':'<p>Sem nenhum erro! 👏</p>'}<p><b>As regras do cartaz</b></p><div class="chips">${ch}</div><p>Queres tentar outra vez e melhorar o resultado?</p></div>`;
+  fb('Fantástico! És um bom colega! 🏆','ok');$('again').style.display=$('dip').style.display='inline-block';
+  beep(SND.fim);say('Fantástico! Missão concluída!');robot('dance');
+  const cs=['#f97316','#22c55e','#3b82f6','#ec4899','#eab308'];
+  for(let i=0;i<80;i++){const c=el('div','confetti'),d=2+Math.random()*1.8;
+    c.style.cssText=`left:${Math.random()*100}vw;animation-duration:${d}s;background:${cs[i%5]}`;
+    document.body.append(c);setTimeout(()=>c.remove(),d*1000)}}
 
-/* ------------------ ESTADO ------------------- */
-let questions = [];
-let currentIndex = 0;
-let score = 0;
-const totalQuestions = 15;
-
-/* ------------------ FUNÇÕES ------------------- */
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-}
-
-function resetRobotClasses() {
-    vbRobot.classList.remove("vb-happy", "vb-sad", "vb-celebrate");
-}
-
-function updateProgress(initial = false) {
-    let pct;
-
-    if (initial) {
-        pct = 0; // No início da primeira pergunta
-    } else {
-        pct = ((currentIndex + 1) / totalQuestions) * 100;
-    }
-
-    progressFill.style.width = pct + "%";
-}
-
-function startGame() {
-    questions = [...questionsData];
-    shuffle(questions);
-    questions = questions.slice(0, totalQuestions);
-
-    currentIndex = 0;
-    score = 0;
-    feedbackEl.textContent = "";
-    finalEl.innerHTML = "";
-    resetRobotClasses();
-    updateScore();
-    updateProgress(true);  // PROGRESSO CORRIGIDO
-    enableOptions(true);
-    showQuestion();
-}
-
-function showQuestion() {
-    const q = questions[currentIndex];
-    questionTextEl.textContent = q.text;
-    questionCounterEl.textContent = "Pergunta " + (currentIndex + 1) + " de " + totalQuestions;
-    feedbackEl.textContent = "";
-
-    q.options.forEach((optText, i) => {
-        const btn = optionButtons[i];
-        btn.classList.remove("correct", "wrong", "disabled");
-        btn.querySelector(".txt").textContent = optText;
-    });
-
-    updateProgress();  // PROGRESSO CORRIGIDO (atualiza ao mostrar cada pergunta)
-}
-
-function updateScore() {
-    scoreEl.textContent = "Pontuação: " + score;
-}
-
-function enableOptions(enable) {
-    optionButtons.forEach(btn => {
-        if (enable) {
-            btn.classList.remove("disabled");
-            btn.disabled = false;
-        } else {
-            btn.classList.add("disabled");
-            btn.disabled = true;
-        }
-    });
-}
-
-function handleAnswer(index) {
-    initAudio();
-    enableOptions(false);
-    resetRobotClasses();
-
-    const q = questions[currentIndex];
-    const correctIndex = q.correct;
-    const clickedBtn = optionButtons[index];
-    const correctBtn = optionButtons[correctIndex];
-
-    if (index === correctIndex) {
-        score++;
-        updateScore();
-        feedbackEl.style.color = "#16a34a";
-        feedbackEl.textContent = "✔️ Muito bem! Essa é a atitude de um bom colega!";
-        clickedBtn.classList.add("correct");
-        vbRobot.classList.add("vb-happy");
-        soundCorrect();
-    } else {
-        feedbackEl.style.color = "#dc2626";
-        feedbackEl.textContent = "❌ Ups! Um bom colega faria a opção número " + (correctIndex + 1) + ".";
-        clickedBtn.classList.add("wrong");
-        correctBtn.classList.add("correct");
-        vbRobot.classList.add("vb-sad");
-        soundWrong();
-    }
-
-    setTimeout(() => {
-        resetRobotClasses();
-        currentIndex++;
-        if (currentIndex < totalQuestions) {
-            enableOptions(true);
-            showQuestion();
-        } else {
-            endGame();
-        }
-    }, 1900);
-}
-
-function endGame() {
-    resetRobotClasses();
-    vbRobot.classList.add("vb-celebrate");
-    soundWin();
-    updateProgress(); // Fica a 100% no fim
-    progressFill.style.width = "100%";
-
-    let msg = "";
-    if (score === totalQuestions) {
-        msg = "🏆 Fantástico! Foste um excelente colega em todas as situações!";
-    } else if (score >= totalQuestions * 0.6) {
-        msg = "🎉 Muito bem! Foste um bom colega em " + score + " de " + totalQuestions + " situações!";
-    } else {
-        msg = "😊 Terminaste! Acertaste em " + score + " de " + totalQuestions + ". Continua a praticar!";
-    }
-
-    finalEl.innerHTML = `
-        <div class="final-message">${msg}</div>
-        <button class="btn-restart-panel" onclick="startGame()">Jogar outra vez</button>
-    `;
-}
-
-/* ------------------ EVENTOS ------------------- */
-optionButtons.forEach((btn, i) => {
-    btn.addEventListener("click", () => handleAnswer(i));
-});
-
-/* Iniciar jogo */
-startGame();
+function intro(){
+  document.body.style.background='';document.body.className='s0';cur=-1;$('prog').textContent='Preparação';$('fill').style.width='0';
+  $('zone').textContent='Escola';$('title').textContent="VanBerto's – Como ser um bom colega";
+  $('fala').textContent="Olá! Sou o VanBerto's. Como te chamas?";
+  $('mission').replaceWith(Object.assign(el('div'),{id:'mission'}));
+  const p=el('div','panel final'),i=el('input');i.id='pn';i.maxLength=20;i.placeholder='O teu nome';i.value=name;i.setAttribute('aria-label','O teu nome');
+  const b=el('button','btn','Começar a missão'),go=()=>{name=i.value.trim()||'Colega';RES={};build();$('fname').textContent='👤 '+name;start(0)};
+  b.onclick=go;i.onkeydown=e=>{if(e.key==='Enter')go()};
+  const lv=el('div','row');[['f','😊 Fácil'],['n','🙂 Normal'],['d','⏱ Desafio']].forEach(([k,l])=>{const q=el('button','tag'+(lvl===k?' selected':''),l);q.onclick=()=>{lvl=k;lv.querySelectorAll('.tag').forEach(x=>x.classList.remove('selected'));q.classList.add('selected')};lv.append(q)});
+  p.append(el('p','','Vamos ver que bom colega tu és! São 14 desafios sobre as regras do cartaz da turma. Acerta em sequência para ganhares pontos extra!'),i,lv,el('p','lvh','Fácil mostra a regra do cartaz quando erras. Desafio tem 60 s por missão e pontos a dobrar.'),b);
+  $('mission').append(p);fb('');next.style.display='none';$('again').style.display=$('dip').style.display='none';bub("Olá! Sou o VanBerto's!");play([['wink',-1,true,900]])}
+$('stripe').innerHTML=RULES.map(r=>'<i style="background:'+r.c+'"></i>').join('');
+upd();intro();
+if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0)navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
-
 </body>
 </html>
