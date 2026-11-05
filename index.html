@@ -3,159 +3,637 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0f766e"><link rel="icon" href="icon-192.png">
-<title>VanBerto's – Como ser um bom colega</title>
+<title>Como ser um bom colega · VanBerto’s</title>
+
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
-body{min-height:100vh;display:flex;justify-content:center;align-items:flex-start;transition:background .4s}
-.s0{background:radial-gradient(circle at top,#38bdf8,#020617 65%)}
-.s1{background:radial-gradient(circle at top,#22c55e,#052e16 65%)}
-.s2{background:radial-gradient(circle at top,#4f46e5,#020617 65%)}
-.s3{background:radial-gradient(circle at top,#a855f7,#1e1b4b 65%)}
-.s4{background:radial-gradient(circle at top,#0ea5e9,#0f172a 65%)}
-.s5{background:radial-gradient(circle at top,#fb7185,#4a044e 65%)}
-.s6{background:radial-gradient(circle at top,#ef4444,#450a0a 65%)}
-.s7{background:radial-gradient(circle at top,#facc15,#78350f 65%)}
-.sf{background:radial-gradient(circle at top,#22c55e,#14532d 65%)}
-.star,.meteor,.confetti{position:fixed;pointer-events:none;z-index:9999}
-.star{top:-10px;background:#fff;border-radius:50%;animation:fall linear forwards,tw ease-in-out infinite}
-@keyframes fall{to{transform:translateY(110vh)}}
-@keyframes tw{0%,100%{opacity:.2}50%{opacity:1}}
-.meteor{top:-20px;width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#facc15,#f97316);box-shadow:0 0 10px #facc15;animation:met linear forwards}
-@keyframes met{to{transform:translate3d(-80vw,110vh,0)}}
-.confetti{width:8px;height:14px;border-radius:2px;top:-10px;animation:conf linear forwards}
-@keyframes conf{to{transform:translate3d(0,110vh,0) rotate(360deg)}}
-#game{width:100%;max-width:960px;margin:16px;padding:18px 20px 14px;background:rgba(248,250,252,.96);border-radius:24px;box-shadow:0 16px 40px rgba(15,23,42,.55);position:relative;z-index:2}
-#bar{height:10px;background:#e5e7eb;border-radius:99px;overflow:hidden}
-#fill{height:100%;width:0;background:linear-gradient(90deg,#22c55e,#0ea5e9);transition:width .3s}
-#top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin:8px 0}
-#prog{font-weight:700;color:#0f172a;font-size:.9rem}
-.box{display:inline-block;background:linear-gradient(135deg,#eef2ff,#e0f2fe);border-radius:99px;padding:5px 12px;font-size:.9rem;margin-left:6px;box-shadow:0 2px 6px rgba(15,23,42,.12)}
-#snd,#vz{border:0;background:#e0e7ff;border-radius:99px;padding:6px 12px;font-size:.85rem;cursor:pointer;margin-left:6px}
-#hero{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:6px 0}
-#vb{width:130px;flex:none;filter:drop-shadow(0 0 8px rgba(125,211,252,.7))}
-#vb canvas{width:100%;height:auto;display:block;animation:float 3s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-7px)}}
-.vb-eyelid{transform-origin:40px 23px;animation:blink 5s infinite}
-@keyframes blink{0%,92%,100%{transform:scaleY(0)}95%{transform:scaleY(1)}}
-.vb-arm{transform-origin:63px 44px;animation:wave 1.6s ease-in-out infinite}
-@keyframes wave{0%,50%,100%{transform:rotate(0)}25%,75%{transform:rotate(-16deg)}}
-#vb.glow canvas{animation:glow .45s}
-#vb.shake canvas{animation:shake .3s}
-#vb.dance canvas{animation:dance .9s}
-@keyframes glow{50%{filter:drop-shadow(0 0 18px #7dd3fc);transform:scale(1.08)}}
-@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-@keyframes dance{15%{transform:translateX(-8px) rotate(-10deg)}30%{transform:translateX(8px) rotate(8deg)}45%{transform:translateX(-6px) skewX(-10deg)}60%{transform:translateX(6px) skewX(10deg)}80%{transform:translateX(-4px) rotate(-8deg)}}
-#talk{flex:1;min-width:220px;max-width:560px;text-align:left}
-#zone{font-size:.8rem;letter-spacing:.12em;color:#6b7280;text-transform:uppercase}
-#title{font-size:1.35rem;font-weight:800;color:#020617;margin:2px 0}
-#fala{background:#e0f2fe;border-radius:16px;padding:10px 14px;color:#0f172a;font-size:1rem}
-#mission{background:radial-gradient(circle at top left,#e5edff,#fff 60%);border-radius:18px;padding:12px;min-height:200px;margin-top:8px;animation:in .35s}
-@keyframes in{from{opacity:0;transform:translateY(8px)}}
-.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
-.panel{background:#fff;border-radius:16px;padding:10px;box-shadow:0 4px 12px rgba(15,23,42,.1)}
-.pt{font-weight:700;margin-bottom:6px;color:#111827}
-.row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:6px}
-.tag{display:inline-flex;align-items:center;justify-content:center;min-height:48px;min-width:110px;padding:8px 14px;border-radius:14px;border:2px solid transparent;background:#fff;box-shadow:0 1px 4px rgba(15,23,42,.15);cursor:pointer;font-size:1rem;text-align:center;user-select:none;transition:transform .12s}
-.tag:hover{transform:translateY(-1px)}
-.selected{border-color:#4f46e5;background:#e0e7ff}
-.correct{border-color:#16a34a;background:#dcfce7}
-.wrong{border-color:#dc2626;background:#fee2e2;animation:shake .25s}
-.disabled{opacity:.6;pointer-events:none}
-.stmt{margin-bottom:8px;text-align:center}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}
-#fb{min-height:26px;margin-top:8px;font-weight:700;text-align:center}
-#fb.ok{color:#16a34a}#fb.err{color:#dc2626}
-.btn{margin:10px 4px 0;padding:11px 22px;border:0;border-radius:99px;background:linear-gradient(135deg,#4f46e5,#2563eb);color:#fff;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(37,99,235,.5)}
-#ctrl{text-align:center}
-.final{text-align:center;padding:16px}
-.final .big{font-size:3rem}
-#credit{text-align:center;margin-top:12px;font-size:.85rem;color:#4b5563}
-@media(max-width:600px){#game{margin:8px;padding:12px}#vb{width:100px}#talk{text-align:center}}
-@media(prefers-reduced-motion:reduce){.star,.meteor{display:none}}
-.tag{font:inherit;color:#0f172a}
-.tag:focus-visible,#fvb:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
-body{padding-bottom:120px}
-#pn{font:inherit;font-size:1.1rem;padding:10px 14px;border-radius:12px;border:2px solid #4f46e5;text-align:center;margin:8px 0;max-width:100%}
-.rev{background:#fef3c7;border-radius:12px;padding:8px 12px;margin:8px auto;max-width:520px;font-size:.95rem}
-#fw{position:fixed;bottom:.6rem;right:.8rem;z-index:70;display:flex;flex-direction:column;align-items:center;gap:2px}
-#fvb{width:clamp(70px,9vw,96px);height:auto;cursor:pointer;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 0 12px #7dd3fc)}
-#fvb.glow{animation:glow .45s}#fvb.shake{animation:shake .3s}#fvb.dance{animation:dance .9s}
-#fbub{position:relative;background:linear-gradient(135deg,#dcebff,#fff);border:3px solid #0f172a;border-radius:16px;padding:6px 10px;box-shadow:3px 3px 0 #0f172a;font:700 .8rem "Trebuchet MS",sans-serif;color:#0f172a;max-width:170px;text-align:center;opacity:0;transform:translateY(-6px) scale(.88);transition:opacity .35s,transform .35s;margin-bottom:12px;pointer-events:none}
-#fbub.show{opacity:1;transform:none}
-#fbub::after{content:"";position:absolute;bottom:-13px;left:50%;transform:translateX(-50%);border:9px solid transparent;border-top:12px solid #0f172a;border-bottom:0}
-#fname{font-weight:800;font-size:.85rem;color:#fde047;text-shadow:0 1px 6px #000;max-width:150px;text-align:center;overflow-wrap:anywhere}
-#talk{max-width:640px;margin:0 auto;text-align:center}#hero{display:block}
-#fw{touch-action:none;cursor:grab;user-select:none}
-body{padding-bottom:20px}
-.it{touch-action:none;cursor:grab}
-.ghost{position:fixed;z-index:10000;pointer-events:none;transform:translate(-50%,-50%) scale(1.06);min-width:0;opacity:.95;box-shadow:0 10px 24px rgba(15,23,42,.4);border-color:#4f46e5}
-.dragging{opacity:.35}
-.tgt.over{border-color:#4f46e5;background:#e0e7ff;transform:scale(1.05)}
-.sticky{position:sticky;top:8px;align-self:start}
-.sticky .row{flex-direction:column;align-items:stretch}
-.tgt{flex-direction:column;align-items:stretch;width:100%;min-height:72px}
-.tgt .lab{font-weight:700}
-.in{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:6px}
-.chip{background:#dcfce7;border:1px solid #16a34a;border-radius:10px;padding:3px 8px;font-size:.8rem;animation:popc .25s}
-@keyframes popc{from{transform:scale(.5);opacity:0}}
-#vz{border:0;background:#e0e7ff;border-radius:99px;padding:6px 12px;font-size:.85rem;cursor:pointer;margin-left:6px}
-.lvh{font-size:.85rem;color:#4b5563}
-#dipl{position:fixed;inset:0;z-index:20000;background:#fff;display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto;color:#0f172a}
-.dp{border:10px double #b45309;padding:24px 32px;text-align:center;max-width:760px;width:100%;background:#fffbeb}
-.dpb{font-size:4rem}.dp h1{font-size:2.4rem;margin:.2em 0;color:#1d4ed8}.sig{margin-top:20px;color:#4b5563}
-@media(max-width:600px){.cols{grid-template-columns:1fr 1fr}.tag{min-width:0;padding:8px;font-size:.92rem}.dp{padding:14px}}
-@media print{body>*:not(#dipl){display:none!important}body{background:#fff!important;display:block}#dipl{position:static;display:block}.np{display:none}}
-.stripe{display:flex;height:8px;max-width:320px;margin:0 auto 10px;border-radius:6px;overflow:hidden}.stripe i{flex:1}
-.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0}.chip2{border-radius:12px;padding:4px 10px;font-size:.85rem;font-weight:700}
+:root {
+    --bg: #fffef8;
+    --ink: #1b1b1b;
+    --muted: #4b5563;
+    --brand: #006b5c;
+    --brand-2: #0f766e;
+    --line: #d9e2df;
+    --ok: #7ed957;
+    --ok-ink: #14532d;
+    --bad: #e5482a;
+    --bad-bg: #ffe1d8;
+    --shadow: 0 4px 14px rgba(0,0,0,.12);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 18px 14px 160px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+    text-align: center;
+}
+
+.wrap { max-width: 720px; margin: 0 auto; }
+
+h1 {
+    margin: 4px 0 2px;
+    font-size: clamp(26px, 6vw, 40px);
+    line-height: 1.1;
+    color: var(--brand);
+    letter-spacing: -0.5px;
+}
+
+.autor { margin: 0; font-size: 15px; font-weight: bold; color: var(--brand); }
+
+.stripe {
+    display: flex;
+    height: 8px;
+    max-width: 320px;
+    margin: 12px auto 14px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.stripe i { flex: 1; }
+
+.descricao { max-width: 600px; margin: 0 auto 14px; font-size: 16px; line-height: 1.45; }
+
+.toolbar { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 12px; }
+
+.tool-btn {
+    background: #fff;
+    color: var(--brand);
+    border: 2px solid var(--brand);
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    min-height: 40px;
+}
+.tool-btn:hover { background: #e6f4f1; }
+
+button:focus-visible { outline: 3px solid #1a0da8; outline-offset: 2px; }
+
+/* Progresso */
+.progress-bar-container {
+    width: 100%;
+    background: #e5e7eb;
+    height: 16px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto 16px;
+}
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    transition: width .4s ease;
+}
+
+/* VanBerto fixo */
+
+.vb-robot {
+    display: block;
+    width: 100%;
+    height: auto;
+    animation: vbFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px #38bdf8);
+    transition: filter .25s ease;
+}
+.vb-robot.vb-happy  { animation: vbFloat 3s ease-in-out infinite, vbJump .5s ease-out; filter: drop-shadow(0 0 16px #22c55e); }
+.vb-robot.vb-sad    { animation: vbFloat 3s ease-in-out infinite, vbShake .4s ease-out; filter: drop-shadow(0 0 16px #f97316); }
+.vb-robot.vb-celebrate { animation: vbFloat 3s ease-in-out infinite, vbCelebrate .7s ease-out; filter: drop-shadow(0 0 18px #38bdf8); }
+
+
+
+@keyframes vbFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes vbJump { 0% { transform: translateY(0); } 30% { transform: translateY(-14px); } 60% { transform: translateY(0); } 100% { transform: translateY(-4px); } }
+@keyframes vbShake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-4px); } }
+@keyframes vbCelebrate { 0% { transform: scale(1); } 30% { transform: scale(1.1); } 60% { transform: scale(.98); } 100% { transform: scale(1.02); } }
+
+
+
+/* Robô fixo no canto inferior esquerdo */
+#fixed-robot-wrap {
+    position: fixed;
+    right: clamp(.6rem, 2vw, 1.2rem);
+    bottom: clamp(.6rem, 2vh, 1.2rem);
+    z-index: 70;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    pointer-events: none;
+}
+#vb-robot { width: clamp(64px, 18vw, 92px); cursor: pointer; pointer-events: auto; }
+#vb-robot:focus-visible { outline: 3px solid #1a0da8; outline-offset: 4px; border-radius: 12px; }
+
+#fixed-bubble {
+    position: relative;
+    max-width: min(210px, 62vw);
+    margin: 0 0 12px;
+    padding: 8px 12px;
+    background: #fff;
+    border: 3px solid var(--brand);
+    border-radius: 16px;
+    box-shadow: 3px 3px 0 var(--brand);
+    font-size: clamp(.8rem, 3.4vw, .95rem);
+    font-weight: bold;
+    line-height: 1.3;
+    color: var(--brand);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(6px) scale(.9);
+    transition: opacity .3s, transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+#fixed-bubble.show { opacity: 1; transform: none; }
+#fixed-bubble::after {
+    content: "";
+    position: absolute;
+    left: 50%; margin-left: -9px; bottom: -13px;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 12px solid var(--brand);
+}
+#fixed-bubble::before {
+    content: "";
+    position: absolute;
+    left: 50%; margin-left: -7px; bottom: -8px;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 9px solid #fff;
+    z-index: 1;
+}
+
+#fixed-robot-name {
+    max-width: 150px;
+    padding: 2px 10px;
+    background: #fff;
+    border: 2px solid var(--brand);
+    border-radius: 999px;
+    font-size: .8rem;
+    font-weight: bold;
+    color: var(--brand);
+    overflow-wrap: anywhere;
+    text-align: center;
+    line-height: 1.25;
+}
+
+#prof-tag {
+    position: fixed;
+    bottom: .6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 60;
+    font-size: clamp(.65rem, 1.8vw, .8rem);
+    font-weight: bold;
+    color: var(--brand);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Ecrã do nome */
+#name-screen { display: none; text-align: center; }
+#name-screen .question-text { margin-bottom: 6px; }
+#name-screen p.hint { margin: 0 0 14px; color: var(--muted); }
+#player-name {
+    width: 100%;
+    max-width: 360px;
+    padding: 12px 14px;
+    font: inherit;
+    font-size: 18px;
+    text-align: center;
+    border: 3px solid var(--brand-2);
+    border-radius: 14px;
+    color: var(--ink);
+}
+#player-name:focus { outline: 3px solid #1a0da8; outline-offset: 2px; }
+#name-screen .btn-restart-panel { display: block; margin: 14px auto 0; min-width: 180px; }
+
+/* Cartão da pergunta */
+.panel {
+    background: #fff;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+    text-align: left;
+}
+
+.question-label { margin: 0 0 4px; font-size: 14px; color: var(--muted); }
+.question-text { margin: 0 0 14px; font-size: clamp(18px, 4.6vw, 22px); font-weight: bold; line-height: 1.3; }
+
+.options { display: flex; flex-direction: column; gap: 10px; }
+
+.option-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 56px;
+    padding: 10px 14px;
+    font: inherit;
+    font-size: 17px;
+    line-height: 1.3;
+    text-align: left;
+    color: var(--ink);
+    background: #fff;
+    border: 3px solid var(--brand-2);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background .15s ease, transform .12s ease;
+}
+.option-btn .num {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--brand-2);
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+}
+.option-btn .txt { flex: 1 1 auto; }
+.option-btn .mark { flex: 0 0 auto; font-size: 20px; }
+
+.option-btn:hover:not(:disabled) { background: #e6f4f1; transform: translateY(-1px); }
+.option-btn:disabled { cursor: default; }
+.option-btn.correct { background: var(--ok); border-color: #3f9b1f; color: var(--ok-ink); }
+.option-btn.correct .num { background: #14532d; }
+.option-btn.wrong { background: var(--bad-bg); border-color: var(--bad); }
+.option-btn.wrong .num { background: var(--bad); }
+.option-btn.dim { opacity: .55; }
+
+/* Explicação */
+#explain {
+    display: none;
+    margin-top: 16px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 3px solid var(--rule, #ccc);
+    background: #fff;
+}
+#explain.show { display: block; animation: pop .25s ease-out; }
+@keyframes pop { from { transform: scale(.97); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.ex-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: var(--rule, #ccc);
+    color: var(--rule-ink, #1b1b1b);
+    font-weight: bold;
+    font-size: 16px;
+}
+.ex-head .emoji { font-size: 26px; }
+.ex-body { padding: 10px 14px 12px; font-size: 16px; line-height: 1.45; }
+.ex-body .rule-line { display: block; margin-top: 8px; font-size: 14px; color: var(--muted); }
+.ex-body .verdict { display: block; font-weight: bold; margin-bottom: 4px; font-size: 18px; }
+
+.next-btn, .btn-restart-panel {
+    margin-top: 14px;
+    background: var(--brand-2);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 12px 22px;
+    font: inherit;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    min-height: 48px;
+}
+.next-btn { display: none; margin-left: auto; }
+.next-btn.show { display: block; }
+.next-btn:hover, .btn-restart-panel:hover { background: var(--brand); }
+
+#score { margin-top: 12px; font-size: 15px; color: var(--muted); }
+
+/* Final */
+#final { display: none; text-align: center; }
+#final.show { display: block; }
+.stars { font-size: 44px; letter-spacing: 6px; margin: 4px 0 6px; }
+.final-message { font-size: 20px; font-weight: bold; margin: 0 0 4px; }
+.final-score { margin: 0 0 14px; color: var(--muted); }
+.review-title { margin: 14px 0 8px; font-size: 16px; font-weight: bold; }
+.chips { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+.chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    border-radius: 10px;
+    background: var(--c);
+    color: var(--ink);
+    font-size: 15px;
+}
+.chip.dark-ink { color: #fff; }
+.chip .emoji { font-size: 20px; }
+.chip .name { flex: 1 1 auto; font-weight: bold; }
+.chip .st { flex: 0 0 auto; background: #fff; color: var(--ink); border-radius: 999px; padding: 2px 10px; font-size: 14px; font-weight: bold; }
+
+.confetti { position: fixed; top: -30px; z-index: 50; pointer-events: none; animation: fall linear forwards; }
+@keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: .9; } }
+
+@media (max-width: 560px) {
+    body { padding: 12px 10px 150px; }
+    .toolbar { gap: 6px; }
+    #prof-tag { left: .8rem; transform: none; }
+    .tool-btn { white-space: nowrap; padding: 8px 8px; font-size: 13px; }
+    .panel { padding: 14px; }
+    .option-btn { font-size: 16px; }
+    .next-btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+}
 </style>
 </head>
-<body class="s0">
-<div id="game">
-  <div class="stripe" id="stripe" aria-hidden="true"></div>
-  <div id="bar"><div id="fill"></div></div>
-  <div id="top">
-    <div id="prog"></div>
-    <div><span class="box">⭐ <b id="p">0</b></span><span class="box" id="st" style="display:none">🔥 <b id="sk">0</b></span><span class="box" id="tm" style="display:none"></span><span class="box">✔ <b id="c">0</b></span><span class="box">✘ <b id="w">0</b></span><button id="snd" type="button">🔊 Som</button><button id="vz" type="button">🤐 Voz desligada</button></div>
-  </div>
 
-  <div id="hero">
-    <div id="talk"><div id="zone"></div><div id="title"></div><div id="fala"></div></div>
-  </div>
+<body>
+<div class="wrap">
 
-  <div id="mission"></div>
-  <div id="fb"></div>
-  <div id="ctrl"><button id="next" class="btn" style="display:none"></button><button id="dip" class="btn" style="display:none">🎓 Diploma</button><button id="again" class="btn" style="display:none">↺ Jogar de novo</button></div>
-  <div id="fw"><div id="fbub" role="status" aria-live="polite"></div><canvas id="fvb" role="button" tabindex="0" aria-label="VanBerto's – clica para uma dica"></canvas><div id="fname">👤 Bom colega</div></div>
-  <div id="credit">© Prof.ª Vanda Várzea</div>
+<h1>Como ser um bom colega</h1>
+<p class="autor">Professora Vanda Várzea</p>
+<div class="stripe" id="stripe" aria-hidden="true"></div>
+
+<p class="descricao">
+    Lê a situação com atenção e escolhe a melhor resposta. O VanBerto’s vai reagir às tuas escolhas! 🤖💚
+</p>
+
+<div class="toolbar">
+    <button class="tool-btn" id="sound-btn" type="button" aria-pressed="false">🔊 Som ligado</button>
+    <button class="tool-btn" type="button" onclick="startGame()">🔄 Reiniciar jogo</button>
+    <button class="tool-btn" type="button" id="name-btn">✏️ Mudar nome</button>
+</div>
+
+<div class="progress-bar-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress">
+    <div class="progress-bar" id="progress-fill"></div>
+</div>
+
+<div class="panel" id="game-panel">
+    <div id="name-screen">
+        <p class="question-text">Como te chamas?</p>
+        <p class="hint">Escreve o teu nome para o VanBerto’s te conhecer.</p>
+        <input id="player-name" type="text" maxlength="20" placeholder="O teu nome" autocomplete="off" aria-label="O teu nome">
+        <button class="btn-restart-panel" id="start-btn" type="button">Começar ▶</button>
+    </div>
+
+    <div id="quiz">
+        <p class="question-label" id="question-counter">Pergunta 1 de 15</p>
+        <p class="question-text" id="question-text"></p>
+
+        <div class="options" id="options"></div>
+
+        <div id="explain" aria-live="polite">
+            <div class="ex-head"><span class="emoji" id="ex-emoji"></span><span id="ex-name"></span></div>
+            <div class="ex-body"><span class="verdict" id="ex-verdict"></span><span id="ex-text"></span><span class="rule-line" id="ex-rule"></span></div>
+        </div>
+
+        <button class="next-btn" id="next-btn" type="button">Seguinte ▶</button>
+        <div id="score">Pontuação: 0</div>
+    </div>
+
+    <div id="final" aria-live="polite"></div>
+</div>
+
+</div>
+
+<div id="prof-tag">© Prof.ª Vanda Várzea</div>
+
+<div id="fixed-robot-wrap">
+    <div id="fixed-bubble" aria-live="polite"></div>
+    <canvas class="vb-robot" id="vb-robot" width="96" height="96" role="button" tabindex="0" aria-label="VanBerto’s — clica para falar"></canvas>
+    <div id="fixed-robot-name">👤 Colega</div>
 </div>
 
 <script>
-const $=id=>document.getElementById(id);
-const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
-const shuf=a=>[...a].sort(()=>Math.random()-.5);
+/* ------------------ REGRAS DO CARTAZ ------------------- */
+const RULES = [
+    { e: "👋", n: "Cumprimentar os colegas e professores", d: "começar o dia com amizade e respeito.", c: "#ff6b2c" },
+    { e: "😊", n: "Ser simpático com todos",               d: "evitar conflitos e ajudar quem precisa.", c: "#e395c0" },
+    { e: "🎒", n: "Vir preparado para aprender",           d: "trazer cadernos, lápis e muita vontade.", c: "#8c96ff" },
+    { e: "✋", n: "Levantar a mão para partilhar ideias",  d: "todos merecem ser ouvidos.", c: "#c3fb6d" },
+    { e: "🧹", n: "Manter a sala e o recreio limpos",      d: "não deixar lixo no chão.", c: "#0399b5" },
+    { e: "💻", n: "Usar computadores e tablets de forma responsável", d: "seguir as instruções da professora.", c: "#ffdd2d" },
+    { e: "🤝", n: "Ajudar os colegas",                     d: "partilhar ideias e colaborar nos trabalhos de grupo, porque juntos aprendemos mais.", c: "#7ed957" },
+    { e: "⏰", n: "Chegar a horas",                        d: "cumprir horários e tarefas.", c: "#0bc1e0" },
+    { e: "📣", n: "Ser honesto e pedir ajuda quando preciso", d: "a verdade torna-nos mais fortes.", c: "#1a0da8", dark: true }
+];
 
-/* ===== Fundo: estrelas e meteoros ===== */
-setInterval(()=>{const s=el('div','star'),t=Math.random()*3+1,d=Math.random()*4+4;
-  s.style.cssText=`width:${t}px;height:${t}px;left:${Math.random()*innerWidth}px;animation-duration:${d}s,${Math.random()*1.5+1.5}s`;
-  document.body.appendChild(s);setTimeout(()=>s.remove(),d*1000)},200);
-(function met(){const m=el('div','meteor'),d=Math.random()*3+4;
-  m.style.left=innerWidth*(.6+Math.random()*.4)+'px';m.style.animationDuration=d+'s';
-  document.body.appendChild(m);setTimeout(()=>m.remove(),d*1000);setTimeout(met,4000+Math.random()*6000)})();
+/* r = índice da regra; right = resposta certa; wrong = duas erradas */
+const questionsData = [
+    { r: 0, text: "Chegas à escola e encontras a funcionária à porta. O que fazes?",
+      right: "Dizes “Bom dia!” com um sorriso.",
+      wrong: ["Passas sem dizer nada, porque tens pressa.", "Só cumprimentas os teus amigos."],
+      why: "Cumprimentar todos, e não só os amigos, mostra respeito." },
+    { r: 0, text: "Um colega que não conheces bem entra na sala. O que fazes?",
+      right: "Dizes “Olá!” e sorris.",
+      wrong: ["Esperas que ele diga primeiro.", "Finges que não o vês."],
+      why: "Começar com um “Olá” faz qualquer pessoa sentir-se bem-vinda." },
+    { r: 0, text: "A aula acabou e vais sair da sala. O que faz um bom colega?",
+      right: "Despede-se da professora e dos colegas.",
+      wrong: ["Sai a correr sem dizer nada.", "Só se despede se a professora olhar para ele."],
+      why: "Despedir-se também é uma forma de cumprimentar com educação." },
+    { r: 1, text: "Dois colegas discutem por causa de uma jogada no recreio. O que faz um bom colega?",
+      right: "Ajuda a acalmar e propõe repetir a jogada.",
+      wrong: ["Fica do lado do amigo mais próximo e grita com o outro.", "Chama mais colegas para verem a confusão."],
+      why: "Um colega simpático ajuda a resolver o conflito, em vez de o aumentar." },
+    { r: 1, text: "Um colega está sozinho no recreio. O que fazes?",
+      right: "Convidas para brincar contigo.",
+      wrong: ["Achas que ele gosta de estar sozinho e deixas-o.", "Dizes aos outros que ele é esquisito."],
+      why: "Convidar quem está sozinho é uma forma simples de ajudar." },
+    { r: 1, text: "Um colega disse uma coisa que te irritou. Como reages?",
+      right: "Respiras fundo e dizes com calma o que sentiste.",
+      wrong: ["Respondes com um insulto.", "Ficas sem lhe falar durante uma semana."],
+      why: "Falar com calma evita conflitos e resolve o problema mais depressa." },
+    { r: 2, text: "Amanhã há aula de Português. O que fazes antes de ires para a escola?",
+      right: "Verificas a mochila e preparas o material.",
+      wrong: ["Deixas para ver de manhã, à pressa.", "Contas pedir tudo emprestado aos colegas."],
+      why: "Preparar a mochila na véspera evita esquecimentos e atrasos." },
+    { r: 2, text: "Esqueceste-te do lápis em casa. O que fazes?",
+      right: "Pedes emprestado com educação e lembras-te de o trazer amanhã.",
+      wrong: ["Ficas sem fazer nada, porque não tens lápis.", "Tiras um lápis da mochila de um colega sem pedir."],
+      why: "Podemos esquecer-nos de algo, mas pedir bem e corrigir no dia seguinte é a atitude certa." },
+    { r: 2, text: "A professora vai começar uma matéria nova. Como te preparas?",
+      right: "Arrumas o que não precisas e ficas atento.",
+      wrong: ["Continuas a conversar com o colega do lado.", "Pensas que vai ser aborrecido e desligas."],
+      why: "Vir com vontade de aprender começa por estar atento desde o primeiro minuto." },
+    { r: 3, text: "A professora está a explicar e tu queres falar. O que deves fazer?",
+      right: "Levantar a mão e esperar a tua vez.",
+      wrong: ["Começar a falar por cima.", "Fazer barulho para chamar a atenção."],
+      why: "Esperar a vez deixa todos ouvirem a explicação." },
+    { r: 3, text: "Sabes a resposta, mas a professora perguntou a outro colega. O que fazes?",
+      right: "Esperas e, se for preciso, levantas a mão no fim.",
+      wrong: ["Dizes a resposta em voz alta por cima dele.", "Sopras a resposta ao colega."],
+      why: "Deixar o colega pensar dá-lhe a oportunidade de aprender." },
+    { r: 3, text: "Vários colegas querem falar ao mesmo tempo. Como se resolve?",
+      right: "Cada um levanta a mão e fala à sua vez.",
+      wrong: ["Fala quem gritar mais alto.", "Fala quem estiver mais perto da professora."],
+      why: "Com a mão levantada, todos merecem ser ouvidos." },
+    { r: 4, text: "Chegas à sala e vês lixo no chão. O que fazes?",
+      right: "Apanhas e colocas no caixote do lixo.",
+      wrong: ["Empurras com o pé para debaixo da mesa.", "Finges que não é contigo."],
+      why: "Cuidar da sala é tarefa de todos, mesmo do lixo que não foi nosso." },
+    { r: 4, text: "Acabaste o lanche no recreio e tens a embalagem na mão. O que fazes?",
+      right: "Deitas no caixote do lixo.",
+      wrong: ["Deixas debaixo do banco.", "Atiras para o chão, alguém há de apanhar."],
+      why: "O recreio fica limpo quando cada um deita o seu lixo no sítio certo." },
+    { r: 4, text: "Acabaste de pintar e a mesa ficou suja de tinta. O que fazes?",
+      right: "Limpas a mesa antes de saíres.",
+      wrong: ["Deixas, porque há de vir alguém da limpeza.", "Dizes que a mesa já estava suja."],
+      why: "Quem suja deve limpar: assim a sala fica boa para a próxima turma." },
+    { r: 5, text: "A professora pede para arrumar o computador ou o tablet. O que fazes?",
+      right: "Arrumas com cuidado, como te ensinaram.",
+      wrong: ["Fechas à pressa e deixas tudo desarrumado.", "Dizes que não foste tu que usaste."],
+      why: "Os equipamentos são de todos e precisam de cuidado." },
+    { r: 5, text: "A professora diz para usares o tablet só para a atividade. O que fazes?",
+      right: "Usas só para a atividade, como foi pedido.",
+      wrong: ["Abres jogos às escondidas.", "Mexes nos tablets dos colegas sem pedir."],
+      why: "Seguir as instruções da professora é usar a tecnologia de forma responsável." },
+    { r: 5, text: "Numa pesquisa, aparece um site a pedir o teu nome e a tua morada para ganhares um prémio. O que fazes?",
+      right: "Não escreves nada e chamas a professora.",
+      wrong: ["Preenches, para ver se ganhas o prémio.", "Clicas em tudo para fechar a janela."],
+      why: "Dados pessoais não se partilham na internet sem falar com um adulto." },
+    { r: 6, text: "Estás num trabalho de grupo. Como age um bom colega?",
+      right: "Partilha ideias e ouve os outros.",
+      wrong: ["Quer mandar em tudo sozinho.", "Não deixa ninguém falar."],
+      why: "Num grupo, as ideias de todos juntas dão um trabalho melhor." },
+    { r: 6, text: "Um colega comete um erro numa atividade. Como és um bom colega?",
+      right: "Ajudas e dizes que está tudo bem, todos erramos.",
+      wrong: ["Gozas com ele à frente da turma.", "Gritas que ele errou."],
+      why: "Errar faz parte de aprender, e ajudar faz o colega ganhar confiança." },
+    { r: 6, text: "Um colega do grupo não está a fazer a sua parte. O que fazes?",
+      right: "Perguntas se precisa de ajuda e combinam as tarefas.",
+      wrong: ["Fazes tudo sozinho e ficas zangado.", "Dizes à turma que ele não faz nada."],
+      why: "Perguntar com calma ajuda o grupo a trabalhar junto." },
+    { r: 7, text: "A aula começa às 9h. O que faz um bom colega?",
+      right: "Chega a horas e já com tudo pronto.",
+      wrong: ["Chega sempre depois do toque.", "Fica a brincar no recreio depois do toque."],
+      why: "Chegar a horas respeita a professora e os colegas." },
+    { r: 7, text: "Tens de entregar um trabalho até sexta-feira. O que fazes?",
+      right: "Fazes com tempo e entregas no prazo.",
+      wrong: ["Deixas para a última hora e não entregas.", "Inventas uma desculpa em vez de fazer o trabalho."],
+      why: "Cumprir prazos mostra responsabilidade." },
+    { r: 7, text: "O recreio acabou e o toque já soou. O que fazes?",
+      right: "Vais logo para a fila ou para a sala.",
+      wrong: ["Acabas o jogo primeiro, é só mais um minuto.", "Esperas que alguém te venha buscar."],
+      why: "Cumprir os horários evita atrasos e ajuda toda a turma." },
+    { r: 8, text: "Partiste sem querer o lápis de um colega. O que fazes?",
+      right: "Contas a verdade e pedes desculpa.",
+      wrong: ["Escondes o lápis e finges que não sabes.", "Dizes que foi outro colega."],
+      why: "Dizer a verdade é difícil, mas faz-nos mais fortes e merecedores de confiança." },
+    { r: 8, text: "Não percebeste a matéria. O que faz um bom colega?",
+      right: "Pede ajuda à professora.",
+      wrong: ["Finge que percebeu.", "Copia do colega sem perceber."],
+      why: "Pedir ajuda não é fraqueza: é o primeiro passo para aprender." },
+    { r: 8, text: "Encontras no chão da sala uma coisa que não é tua. O que fazes?",
+      right: "Entregas à professora para descobrir o dono.",
+      wrong: ["Ficas com ela, ninguém viu.", "Perguntas só aos teus amigos e, se ninguém quiser, guardas."],
+      why: "Ser honesto é devolver o que não é nosso, mesmo que ninguém esteja a ver." }
+];
 
-/* ===== Som e voz ===== */
-let ac=null,sound=true,voice=false;
-$('snd').onclick=()=>{sound=!sound;$('snd').textContent=sound?'🔊 Som':'🔇 Som'};
-$('vz').onclick=()=>{voice=!voice;$('vz').textContent=voice?'🗣️ Voz ligada':'🤐 Voz desligada';if(!voice&&window.speechSynthesis)speechSynthesis.cancel()};
-function beep(notes){if(!sound)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();
-  notes.forEach(([f,d,o])=>{const os=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime+o;
-    os.type='square';os.frequency.value=f;os.connect(g);g.connect(ac.destination);
-    g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);os.start(t);os.stop(t+d)})}catch(e){}}
-const SND={ok:[[660,.12,0],[880,.12,.12]],err:[[220,.18,0],[160,.2,.12]],next:[[440,.1,0],[660,.1,.11]],fim:[[523,.12,0],[659,.12,.14],[784,.14,.28],[1046,.18,.45]]};
-function say(t){if(!voice||!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='pt-PT';speechSynthesis.speak(u)}
+/* Frases do VanBerto's */
+const PHRASES = {
+    intro:   ["Qual é a melhor atitude?", "Pensa bem… o que faria um bom colega?", "Lê com atenção!", "Escolhe a opção certa!"],
+    happy:   ["Boa, {n}! É assim mesmo!", "Isso é que é um bom colega!", "Muito bem, {n}! 🎉", "Excelente atitude!"],
+    sad:     ["Ups! Vamos aprender com isto.", "Não faz mal, {n}, todos erramos.", "Quase! Lê a explicação.", "Na próxima consegues, {n}!"],
+    start:   ["Olá! Vamos ver que bom colega tu és?"]
+};
 
-/* ===== Robô ===== */
+/* ------------------ DOM ------------------- */
+const $ = id => document.getElementById(id);
+const questionTextEl = $("question-text");
+const questionCounterEl = $("question-counter");
+const optionsEl = $("options");
+const scoreEl = $("score");
+const finalEl = $("final");
+const quizEl = $("quiz");
+const progressFill = $("progress-fill");
+const progressEl = $("progress");
+const vbRobot = $("vb-robot");
+const bubbleEl = $("fixed-bubble");
+const nameScreen = $("name-screen");
+const nameInput = $("player-name");
+const nameLabel = $("fixed-robot-name");
+const explainEl = $("explain");
+const nextBtn = $("next-btn");
+const soundBtn = $("sound-btn");
+
+/* Faixa de cores do cartaz */
+$("stripe").innerHTML = RULES.map(r => '<i style="background:' + r.c + '"></i>').join("");
+
+/* ------------------ ÁUDIO ------------------- */
+let audioCtx = null;
+let soundOn = true;
+
+function initAudio() {
+    if (!audioCtx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (AC) audioCtx = new AC();
+    }
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+}
+
+function playTone(freq, time, duration, type = "square", vol = 0.2) {
+    if (!soundOn || !audioCtx) return;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    const t0 = audioCtx.currentTime + time;
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, t0);
+    gain.gain.setValueAtTime(vol, t0);
+    gain.gain.exponentialRampToValueAtTime(0.001, t0 + duration);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(t0);
+    osc.stop(t0 + duration);
+}
+
+function soundCorrect() { initAudio(); playTone(900, 0, .10); playTone(1200, .10, .10); playTone(1500, .20, .14); }
+function soundWrong()   { initAudio(); playTone(260, 0, .16, "square", .25); playTone(180, .16, .20, "square", .25); }
+function soundWin()     { initAudio(); playTone(700, 0, .16); playTone(900, .18, .16); playTone(1100, .36, .20); playTone(1400, .60, .28); }
+
+soundBtn.addEventListener("click", () => {
+    soundOn = !soundOn;
+    soundBtn.textContent = soundOn ? "🔊 Som ligado" : "🔇 Som desligado";
+    soundBtn.setAttribute("aria-pressed", String(!soundOn));
+});
+
+/* ------------------ ESTADO ------------------- */
+const totalQuestions = 15;
+let questions = [];
+let currentIndex = 0;
+let score = 0;
+let answered = false;
+let results = {};   // regra -> { ok, total }
+
+/* ------------------ UTILITÁRIOS ------------------- */
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function pick(list) { return list[Math.floor(Math.random() * list.length)]; }
+
+let bubTimer = null;
+function say(text) {
+    bubbleEl.textContent = text;
+    bubbleEl.classList.add("show");
+    clearTimeout(bubTimer);
+    bubTimer = setTimeout(() => bubbleEl.classList.remove("show"), 3800);
+}
+
+let playerName = "Colega";
+function esc(t) {
+    return String(t).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+function sayPick(list) { say(pick(list).replace("{n}", playerName)); }
+
+/* ------------------ VANBERTO’S ATUAL (canvas) ------------------- */
 function rrVan(ctx,x,y,w,h,r){
   const rr=Math.min(r,w/2,h/2);
   ctx.beginPath();ctx.moveTo(x+rr,y);ctx.arcTo(x+w,y,x+w,y+h,rr);ctx.arcTo(x+w,y+h,x,y+h,rr);ctx.arcTo(x,y+h,x,y,rr);ctx.arcTo(x,y,x+w,y,rr);ctx.closePath();
@@ -301,243 +779,297 @@ function drawVBAtual(ctx,blink,step,armsUp){
   ctx.restore();
 }
 
+const vbCtx = vbRobot.getContext("2d");
+const DPR = Math.min(window.devicePixelRatio || 1, 3);
+vbRobot.width = 96 * DPR;
+vbRobot.height = 96 * DPR;
+vbCtx.scale(DPR, DPR);
+const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+let vbMode = null;      // null | "happy" | "sad" | "celebrate"
+let vbBusy = false;
 
-const CV=['fvb'].map(i=>{const c=$(i),x=c.getContext('2d'),D=Math.min(devicePixelRatio||1,3);c.width=c.height=96*D;x.scale(D,D);return x});
-const draw=(b,s,a)=>CV.forEach(x=>drawVBAtual(x,b,s,a));
-let tok=0,quiet=0,bt=null;
-function play(fr){const t=++tok;let i=0;(function n(){if(t!==tok)return;if(i>=fr.length){draw(false,-1,false);return}const f=fr[i++];draw(f[0],f[1],f[2]);setTimeout(n,f[3])})()}
-function bub(t){const b=$('fbub');b.textContent=t;b.classList.add('show');clearTimeout(bt);bt=setTimeout(()=>b.classList.remove('show'),3500)}
-function robot(m){quiet=Date.now()+2500;
-  [$('fvb')].forEach(e=>{e.classList.remove('glow','shake','dance');void e.offsetWidth;e.classList.add(m);setTimeout(()=>e.classList.remove(m),900)});
-  play(m==='glow'?[['happy',-1,true,800]]:m==='shake'?[['sad',-1,false,1300]]:[['wink',0,false,180],['happy',1,true,180],['happy',0,true,180],['happy',1,true,180],['wink',-1,true,500]])}
-draw(false,-1,false);
-const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
-setInterval(()=>{if(document.hidden||REDUCED||Date.now()<quiet)return;const r=Math.random();
-  r<.3?play([['happy',-1,true,500]]):r<.6?play([[false,0,false,170],[false,1,false,170],[false,0,false,170],[false,1,false,170]]):play([[true,-1,false,180]])},3600);
-const hint=()=>{const m=curM;robot('glow');bub(m?(m.h||m.d||m.f):'Olá!')};
-let drag=null,mv=0;const FW=$('fw');
-FW.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,l:FW.offsetLeft,t:FW.offsetTop};mv=0;FW.setPointerCapture(e.pointerId)});
-FW.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;mv=Math.max(mv,Math.abs(dx)+Math.abs(dy));
-  if(mv>6){FW.style.right=FW.style.bottom='auto';FW.style.left=Math.min(innerWidth-FW.offsetWidth,Math.max(0,drag.l+dx))+'px';FW.style.top=Math.min(innerHeight-FW.offsetHeight,Math.max(0,drag.t+dy))+'px'}});
-FW.addEventListener('pointerup',()=>{drag=null;if(mv<=6)hint()});
-$('fvb').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hint()}};
-
-/* ===== Pontuação e feedback ===== */
-let ok=0,bad=0,cur=0,pts=0,streak=0,name='',lvl='n',tmr=null,curM=null,MD=[];const errs=[];
-const PR=['Muito bem!','Boa!','Excelente!','Isso mesmo!','Estás a arrasar!'];
-const upd=()=>{$('c').textContent=ok;$('w').textContent=bad;$('p').textContent=pts;$('sk').textContent=streak;$('st').style.display=streak>=3?'inline-block':'none'};
-const fb=(t,c)=>{$('fb').textContent=t||'';$('fb').className=c||''};
-function track(g){const m=curM;if(!m||m.r==null)return;const q=RES[m.r]=RES[m.r]||{ok:0,t:0};if(!m.tried){m.tried=1;q.t++;if(g)q.ok++}}
-function right(x){track(1);streak++;const g=(10+(streak>=3?5:0))*(lvl==='d'?2:1);pts+=g;ok++;upd();const p=PR[Math.floor(Math.random()*PR.length)];
-  fb(`${p} ⭐ +${g}`+(streak>=3?` 🔥 Sequência de ${streak}!`:'')+(x?' '+x:''),'ok');beep(SND.ok);say(p);bub(p+(name?' '+name:''));robot(streak>=3?'dance':'glow')}
-function wrong(d){track(0);errs[cur]=(errs[cur]||0)+1;streak=0;bad++;upd();const dd=lvl==='f'&&d?d:'Pensa lá outra vez…';fb(dd,'err');beep(SND.err);say('Pensa lá outra vez.');bub(dd);robot('shake')}
-function timer(){clearInterval(tmr);const t=$('tm');if(lvl!=='d'){t.style.display='none';return}let n=60;t.style.display='inline-block';t.textContent='⏱ '+n;
-  tmr=setInterval(()=>{n--;t.textContent='⏱ '+n;if(n<=0){clearInterval(tmr);wrong('Tempo esgotado!');fb('Tempo esgotado! ⏱','err');setTimeout(()=>cur+1<M.length?start(cur+1):final(),900)}},1000)}
-const flash=(b,c)=>{b.classList.add(c);setTimeout(()=>b.classList.remove(c),600)};
-
-/* ===== Missões (dados) ===== */
-const RULES = [
-    { e: "👋", n: "Cumprimentar os colegas e professores", d: "começar o dia com amizade e respeito.", c: "#ff6b2c" },
-    { e: "😊", n: "Ser simpático com todos",               d: "evitar conflitos e ajudar quem precisa.", c: "#e395c0" },
-    { e: "🎒", n: "Vir preparado para aprender",           d: "trazer cadernos, lápis e muita vontade.", c: "#8c96ff" },
-    { e: "✋", n: "Levantar a mão para partilhar ideias",  d: "todos merecem ser ouvidos.", c: "#c3fb6d" },
-    { e: "🧹", n: "Manter a sala e o recreio limpos",      d: "não deixar lixo no chão.", c: "#0399b5" },
-    { e: "💻", n: "Usar computadores e tablets de forma responsável", d: "seguir as instruções da professora.", c: "#ffdd2d" },
-    { e: "🤝", n: "Ajudar os colegas",                     d: "partilhar ideias e colaborar nos trabalhos de grupo, porque juntos aprendemos mais.", c: "#7ed957" },
-    { e: "⏰", n: "Chegar a horas",                        d: "cumprir horários e tarefas.", c: "#0bc1e0" },
-    { e: "📣", n: "Ser honesto e pedir ajuda quando preciso", d: "a verdade torna-nos mais fortes.", c: "#1a0da8", dark: true }
-];
-
-/* r = índice da regra; right = resposta certa; wrong = duas erradas */
-const questionsData = [
-    { r: 0, text: "Um colega chega de manhã à sala. O que fazes?",
-      right: "Cumprimentas com um sorriso.",
-      wrong: ["Viras a cara para o lado.", "Finges que não o vês."] },
-    { r: 0, text: "Entras na sala e a professora já lá está. O que fazes?",
-      right: "Dizes “Bom dia, professora!”.",
-      wrong: ["Entras sem dizer nada e vais logo para o lugar.", "Resmungas porque preferias estar em casa."] },
-
-    { r: 1, text: "Dois colegas começam a discutir por causa de um jogo. O que faz um bom colega?",
-      right: "Ajuda a acalmar e sugere que partilhem o jogo.",
-      wrong: ["Põe-se do lado de um e grita com o outro.", "Incentiva a discussão para ver quem ganha."] },
-    { r: 1, text: "Um colega está triste no recreio. O que faz um bom colega?",
-      right: "Pergunta se precisa de ajuda.",
-      wrong: ["Diz “isso não é problema meu”.", "Ri-se da cara dele."] },
-
-    { r: 2, text: "Amanhã há aula de Português. O que fazes antes de ir para a escola?",
-      right: "Verificas se tens o caderno, o lápis e o material todo.",
-      wrong: ["Deixas para ver quando chegares à escola.", "Pedes sempre o material aos colegas."] },
-    { r: 2, text: "A professora começa uma atividade nova. Como age um bom colega?",
-      right: "Está atento e com vontade de aprender.",
-      wrong: ["Diz logo que é muito difícil, sem tentar.", "Distrai-se a desenhar na mesa."] },
-
-    { r: 3, text: "A professora está a explicar e tu queres falar. O que deves fazer?",
-      right: "Levantar a mão e esperar a tua vez.",
-      wrong: ["Começar a falar por cima.", "Fazer barulho para chamar a atenção."] },
-    { r: 3, text: "Um colega está a contar uma ideia e tu tens outra. O que fazes?",
-      right: "Esperas que ele acabe e levantas a mão.",
-      wrong: ["Interrompes e dizes que a ideia dele é má.", "Ris-te da ideia dele."] },
-
-    { r: 4, text: "Chegas à sala e vês lixo no chão. O que fazes?",
-      right: "Apanhas e colocas no caixote do lixo.",
-      wrong: ["Empurras com o pé.", "Finges que não é contigo."] },
-    { r: 4, text: "Acabaste o lanche no recreio e tens a embalagem na mão. O que fazes?",
-      right: "Deitas no caixote do lixo.",
-      wrong: ["Deixas debaixo do banco.", "Atiras para o chão, alguém há de apanhar."] },
-
-    { r: 5, text: "A professora pede para arrumar o computador ou o tablet. O que fazes?",
-      right: "Arrumas com cuidado, como te ensinaram.",
-      wrong: ["Fechas à pressa e deixas tudo desarrumado.", "Dizes que não foste tu que usaste."] },
-    { r: 5, text: "A professora diz para usares o tablet só para a atividade. O que fazes?",
-      right: "Usas só para a atividade, como foi pedido.",
-      wrong: ["Abres jogos às escondidas.", "Mexes nos tablets dos colegas sem pedir."] },
-
-    { r: 6, text: "Estás num trabalho de grupo. Como age um bom colega?",
-      right: "Partilha ideias e ouve os outros.",
-      wrong: ["Quer mandar em tudo sozinho.", "Não deixa ninguém falar."] },
-    { r: 6, text: "Um colega comete um erro numa atividade. Como és um bom colega?",
-      right: "Ajudas e dizes que está tudo bem, todos erram.",
-      wrong: ["Gozas com ele à frente da turma.", "Gritas que ele errou."] },
-
-    { r: 7, text: "A aula começa às 9h. O que faz um bom colega?",
-      right: "Chega a horas e já com tudo pronto.",
-      wrong: ["Chega sempre depois do toque.", "Fica a brincar no recreio depois do toque."] },
-    { r: 7, text: "Tens de entregar um trabalho até sexta-feira. O que fazes?",
-      right: "Fazes com tempo e entregas no prazo.",
-      wrong: ["Deixas para a última hora e não entregas.", "Inventas uma desculpa em vez de fazer o trabalho."] },
-
-    { r: 8, text: "Partiste sem querer o lápis de um colega. O que fazes?",
-      right: "Contas a verdade e pedes desculpa.",
-      wrong: ["Escondes o lápis e finges que não sabes.", "Dizes que foi outro colega."] },
-    { r: 8, text: "Não percebeste a matéria. O que faz um bom colega?",
-      right: "Pede ajuda à professora.",
-      wrong: ["Finge que percebeu.", "Copia do colega sem perceber."] }
-];
-
-
-let M=[],RES={};
-function build(){
-  const byRule=RULES.map((_,r)=>questionsData.filter(q=>q.r===r));
-  let ch=byRule.map(l=>l[Math.floor(Math.random()*l.length)]);
-  ch=shuf(ch.concat(shuf(questionsData.filter(q=>!ch.includes(q))).slice(0,2)));
-  const Q=ch.map(q=>{const R=RULES[q.r];return{z:'Na escola',t:'O que fazes?',f:q.text,k:'single',c:R.c,r:q.r,
-    h:'Pensa no que um bom colega faria: respeita, ajuda e diz a verdade.',o:[[q.right,1],...q.wrong.map(w=>[w])],d:'Do cartaz: '+R.n+' – '+R.d}});
-  const rights=shuf(questionsData.map(q=>q.right)),wrongs=shuf(questionsData.flatMap(q=>q.wrong));
-  const triage={z:'Cartaz da turma',t:'Bom colega ou não?',f:'Arrasta cada atitude para o sítio certo.',k:'match',c:'#0f766e',A:'Atitudes',B:'Onde fica?',
-    items:[...rights.slice(0,3).map(t=>[t,'g']),...wrongs.slice(0,3).map(t=>[t,'b'])],targets:[['✅ Bom colega',['g']],['❌ Tenho de melhorar',['b']]]};
-  const judge={z:'Recreio',t:'Bom exemplo ou mau exemplo?',f:'Lê cada atitude e decide se é de um bom colega.',k:'judge',c:'#e395c0',lab:['👍 Bom colega','👎 Mau exemplo'],
-    s:shuf([...rights.slice(3,6).map(t=>[t,1]),...wrongs.slice(3,6).map(t=>[t,0])])};
-  const order={z:'O teu dia na escola',t:'Ordena o dia de um bom colega',f:'Clica nos passos pela ordem certa, desde que chegas à escola!',k:'order',c:'#0bc1e0',
-    steps:['Chegar a horas à escola','Cumprimentar os colegas e a professora','Preparar o material da aula','Levantar a mão para falar','Deitar o lixo no caixote antes de sair'],
-    d:'Chegas a horas, cumprimentas, preparas o material, participas e deixas tudo limpo.'};
-  M=[...Q.slice(0,4),triage,...Q.slice(4,8),judge,...Q.slice(8),order];
+function vbDraw(blink, step) {
+    if (vbMode === "happy" || vbMode === "celebrate") drawVBAtual(vbCtx, "happy", -1, true);
+    else if (vbMode === "sad") drawVBAtual(vbCtx, "sad", -1, false);
+    else drawVBAtual(vbCtx, blink || false, step === undefined ? -1 : step, false);
 }
 
-/* ===== Motores ===== */
-const next=$('next');
-function panel(t){const p=el('div','panel');p.append(el('div','pt',t));const r=el('div','row');p.append(r);p.r=r;return p}
-const ENG={
- match(m,box,done){
-  let sel=null,left=m.items.length;const A=panel(m.A),B=panel(m.B),cols=el('div','cols');B.classList.add('sticky');
-  const clr=()=>box.querySelectorAll('.it').forEach(x=>x.classList.remove('selected'));
-  const offOver=()=>box.querySelectorAll('.tgt').forEach(x=>x.classList.remove('over'));
-  const under=e=>{const x=document.elementFromPoint(e.clientX,e.clientY);return x&&x.closest('.tgt')};
-  const place=(t,b,tb)=>{if(tb.ok.includes(t)){right();const c=el('span','chip',b.textContent);tb.querySelector('.in').append(c);b.remove();if(!--left)done()}else{wrong();flash(tb,'wrong')}};
-  m.targets.forEach(([l,ok_])=>{const b=el('button','tag tgt');b.append(el('span','lab',l),el('div','in'));b.ok=ok_;b.onclick=()=>{
-    if(!sel){fb('Arrasta um cartão para aqui.','err');return}
-    place(sel.t,sel.b,b);sel=null;clr()};B.r.append(b)});
-  shuf(m.items).forEach(([l,t])=>{const b=el('button','tag it',l);let st=null,g=null,moved=false;
-    b.onclick=()=>{if(moved||b.classList.contains('disabled'))return;clr();b.classList.add('selected');sel={t,b};fb('')};
-    b.onpointerdown=e=>{if(b.classList.contains('disabled'))return;st={x:e.clientX,y:e.clientY};moved=false;b.setPointerCapture(e.pointerId)};
-    b.onpointermove=e=>{if(!st)return;
-      if(!g&&Math.hypot(e.clientX-st.x,e.clientY-st.y)>8){moved=true;g=b.cloneNode(true);g.className='tag ghost';document.body.append(g);b.classList.add('dragging');clr();sel=null}
-      if(g){g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';offOver();const tb=under(e);if(tb)tb.classList.add('over')}};
-    const end=e=>{if(!st)return;st=null;if(g){const tb=e.type==='pointerup'?under(e):null;g.remove();g=null;b.classList.remove('dragging');offOver();if(tb)place(t,b,tb);setTimeout(()=>moved=false,60)}};
-    b.onpointerup=end;b.onpointercancel=end;A.r.append(b)});
-  cols.append(A,B);box.append(cols)},
- order(m,box,done){let i=0;const p=panel('Clica pela ordem certa:');
-  shuf(m.steps.map((t,k)=>[t,k])).forEach(([t,k])=>{const b=el('button','tag',t);b.onclick=()=>{if(b.classList.contains('disabled'))return;
-    if(k===i){right();b.classList.add('correct','disabled');b.textContent=(i+1)+'. '+t;if(++i===m.steps.length)done()}else{wrong(m.d);flash(b,'wrong')}};p.r.append(b)});
-  box.append(p)},
- single(m,box,done){
-  const p=panel('');let fin=false;
-  shuf(m.o).forEach(([l,c])=>{const b=el('button','tag',l);b.onclick=()=>{if(fin)return;
-    if(c){fin=true;right(m.d);b.classList.add('correct');p.querySelectorAll('.tag').forEach(x=>x.classList.add('disabled'));done()}
-    else{wrong(m.d);flash(b,'wrong')}};p.r.append(b)});
-  box.append(p)},
- judge(m,box,done){
-  let n=0;const p=el('div','panel');
-  m.s.forEach(([txt,safe],i)=>{const d=el('div','stmt'),r=el('div','row');d.append(el('div','',(i+1)+'. '+txt));
-    const LB=m.lab||['Seguro','Perigoso'];const bs=[[LB[0],1],[LB[1],0]].map(([l,v])=>{const b=el('button','tag',l);b.onclick=()=>{
-      if(bs[0].classList.contains('disabled'))return;
-      if(v===safe){right();b.classList.add('correct')}else{wrong();b.classList.add('wrong')}
-      bs.forEach(x=>x.classList.add('disabled'));if(++n===m.s.length)done()};r.append(b);return b});
-    d.append(r);p.append(d)});
-  box.append(p)},
- pick(m,box,done){
-  let n=0;const tot=m.p.filter(x=>x[1]).length,g=el('div','grid');
-  shuf(m.p).forEach(([l,safe])=>{const b=el('button','tag',l);b.onclick=()=>{if(b.classList.contains('correct'))return;
-    if(safe){b.classList.add('correct');right();if(++n===tot)done()}else{wrong('Isso é perigoso! Cuidado.');flash(b,'wrong')}};g.append(b)});
-  box.append(g)}
-};
+function resetRobotClasses() {
+    vbRobot.classList.remove("vb-happy", "vb-sad", "vb-celebrate");
+}
 
-function start(i){
-  cur=i;const base=M[i];let m=Object.assign({},base);
-  if(base.v)Object.assign(m,base.v[Math.floor(Math.random()*base.v.length)]);
-  if(base.k==='judge')m.s=shuf(base.pool).slice(0,6);
-  if(base.k==='pick'){const sf=base.pool.filter(x=>x[1]),dg=base.pool.filter(x=>!x[1]);m.p=[...shuf(sf).slice(0,4),...shuf(dg).slice(0,4)]}
-  curM=m;
-  if(m.c){document.body.className='';document.body.style.background=`radial-gradient(circle at top,${m.c},#0f172a 72%)`}else{document.body.style.background='';document.body.className='s'+(i%8)}
-  $('prog').textContent=`Missão ${i+1} de ${M.length}`;
-  $('fill').style.width=(i/M.length*100)+'%';
-  $('zone').textContent=m.z;$('title').textContent=`Missão ${i+1} – ${m.t}`;$('fala').textContent=m.f;
-  $('mission').replaceWith(Object.assign(el('div'),{id:'mission'}));
-  fb('');next.style.display='none';$('again').style.display=$('dip').style.display='none';
-  ENG[m.k](m,$('mission'),()=>{clearInterval(tmr);$('tm').style.display='none';
-    next.textContent=i===M.length-1?'Ver resultado final →':'Próxima missão →';next.style.display='inline-block'});
-  timer();say(m.f)}
+function setRobot(cls) {
+    resetRobotClasses();
+    void vbRobot.offsetWidth;          // reinicia a animação
+    if (cls) vbRobot.classList.add(cls);
+    vbMode = cls === "vb-happy" ? "happy" : cls === "vb-sad" ? "sad" : cls === "vb-celebrate" ? "celebrate" : null;
+    vbDraw(false);
+}
 
-next.onclick=()=>{clearInterval(tmr);beep(SND.next);cur+1<M.length?start(cur+1):final()};
-$('dip').onclick=()=>{const d=el('div');d.id='dipl';
-  d.innerHTML=`<div class="dp"><div class="dpb">${MD[0]}</div><h2>Diploma de Bom Colega</h2><p>Certifica-se que</p><h1></h1><p>concluiu o jogo <b>Como ser um bom colega</b> e mostrou saber as regras da turma: respeito, ajuda, honestidade e responsabilidade.</p><p>⭐ ${pts} pontos · ${MD[1]} · ${new Date().toLocaleDateString('pt-PT')}</p><p class="sig">© Prof.ª Vanda Várzea</p><div class="np"><button class="btn" id="pr">🖨️ Imprimir / Guardar PDF</button><button class="btn" id="cl">Fechar</button></div></div>`;
-  d.querySelector('h1').textContent=name;document.body.append(d);$('pr').onclick=()=>print();$('cl').onclick=()=>d.remove()};
-$('again').onclick=()=>{ok=bad=pts=streak=0;errs.length=0;RES={};build();upd();start(0)};
+function vbBlink() {
+    if (vbBusy || vbMode) return;
+    vbDraw(true);
+    setTimeout(() => { if (!vbBusy && !vbMode) vbDraw(false); }, 180);
+}
 
-/* ===== Final ===== */
-function final(){
-  document.body.style.background='';document.body.className='sf';next.style.display='none';
-  $('fill').style.width='100%';$('prog').textContent='Missões concluídas';
-  let e='🥉',t='Medalha de Bronze',x='Bom esforço! Estás a aprender e isso é fantástico.';
-  if(bad<=4){e='🥇';t='Medalha de Ouro';x='Excelente trabalho! És um ótimo colega!'}
-  else if(bad<=10){e='🥈';t='Medalha de Prata';x='Muito bem! Faltou só um bocadinho para o ouro.'}
-  $('zone').textContent='Parabéns!';$('title').textContent='⭐ Parabéns, '+name+'! ⭐';
-  $('fala').textContent='Obrigado por jogares comigo! Juntos fazemos uma turma melhor.';
-  MD=[e,t];let best=0,rec=false;try{best=+localStorage.getItem('vbcolega')||0;if(pts>best){localStorage.setItem('vbcolega',pts);rec=best>0;best=pts}}catch(e){}
-  const rv=[...new Set(M.filter((_,k)=>errs[k]).map(m=>m.r!=null?RULES[m.r].n:m.t))];
-  const ch=RULES.map((r,k)=>{const q=RES[k];return q?`<span class="chip2" style="background:${r.c};color:${r.dark?'#fff':'#1b1b1b'}">${r.e} ${r.n} ${q.ok===q.t?'✔':'↻'} ${q.ok}/${q.t}</span>`:''}).join('');
-  const m=$('mission');m.innerHTML=`<div class="final"><div class="big">${e}</div><b>${t}</b><p>⭐ <b>${pts}</b> pontos${rec?' – novo recorde! 🏆':best?' (melhor: '+best+')':''}<br>✔ Certo: <b>${ok}</b> &nbsp; ✘ Errado: <b>${bad}</b></p><p>${x}</p>${rv.length?'<div class="rev"><b>Para rever:</b> '+rv.join(', ')+'</div>':'<p>Sem nenhum erro! 👏</p>'}<p><b>As regras do cartaz</b></p><div class="chips">${ch}</div><p>Queres tentar outra vez e melhorar o resultado?</p></div>`;
-  fb('Fantástico! És um bom colega! 🏆','ok');$('again').style.display=$('dip').style.display='inline-block';
-  beep(SND.fim);say('Fantástico! Missão concluída!');robot('dance');
-  const cs=['#f97316','#22c55e','#3b82f6','#ec4899','#eab308'];
-  for(let i=0;i<80;i++){const c=el('div','confetti'),d=2+Math.random()*1.8;
-    c.style.cssText=`left:${Math.random()*100}vw;animation-duration:${d}s;background:${cs[i%5]}`;
-    document.body.append(c);setTimeout(()=>c.remove(),d*1000)}}
+function vbWalk(steps, speed) {
+    steps = steps || 6; speed = speed || 170;
+    if (vbBusy || vbMode) return;
+    vbBusy = true;
+    let i = 0;
+    const iv = setInterval(() => {
+        if (vbMode) { clearInterval(iv); vbBusy = false; return; }
+        vbDraw(false, i % 2 === 0 ? 0 : 1);
+        i++;
+        if (i >= steps) { clearInterval(iv); vbDraw(false); vbBusy = false; }
+    }, speed);
+}
 
-function intro(){
-  document.body.style.background='';document.body.className='s0';cur=-1;$('prog').textContent='Preparação';$('fill').style.width='0';
-  $('zone').textContent='Escola';$('title').textContent="VanBerto's – Como ser um bom colega";
-  $('fala').textContent="Olá! Sou o VanBerto's. Como te chamas?";
-  $('mission').replaceWith(Object.assign(el('div'),{id:'mission'}));
-  const p=el('div','panel final'),i=el('input');i.id='pn';i.maxLength=20;i.placeholder='O teu nome';i.value=name;i.setAttribute('aria-label','O teu nome');
-  const b=el('button','btn','Começar a missão'),go=()=>{name=i.value.trim()||'Colega';RES={};build();$('fname').textContent='👤 '+name;start(0)};
-  b.onclick=go;i.onkeydown=e=>{if(e.key==='Enter')go()};
-  const lv=el('div','row');[['f','😊 Fácil'],['n','🙂 Normal'],['d','⏱ Desafio']].forEach(([k,l])=>{const q=el('button','tag'+(lvl===k?' selected':''),l);q.onclick=()=>{lvl=k;lv.querySelectorAll('.tag').forEach(x=>x.classList.remove('selected'));q.classList.add('selected')};lv.append(q)});
-  p.append(el('p','','Vamos ver que bom colega tu és! São 14 desafios sobre as regras do cartaz da turma. Acerta em sequência para ganhares pontos extra!'),i,lv,el('p','lvh','Fácil mostra a regra do cartaz quando erras. Desafio tem 60 s por missão e pontos a dobrar.'),b);
-  $('mission').append(p);fb('');next.style.display='none';$('again').style.display=$('dip').style.display='none';bub("Olá! Sou o VanBerto's!");play([['wink',-1,true,900]])}
-$('stripe').innerHTML=RULES.map(r=>'<i style="background:'+r.c+'"></i>').join('');
-upd();intro();
-if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0)navigator.serviceWorker.register('sw.js').catch(()=>{});
+vbDraw(false);
+setInterval(() => {
+    if (vbBusy || vbMode || document.hidden || REDUCED) return;
+    if (Math.random() < 0.35) vbWalk(); else vbBlink();
+}, 3600);
+
+function setProgress(done) {
+    const pct = Math.round((done / totalQuestions) * 100);
+    progressFill.style.width = pct + "%";
+    progressEl.setAttribute("aria-valuenow", String(pct));
+}
+
+function updateScore() { scoreEl.textContent = "Pontuação: " + score; }
+
+/* Escolhe 15 de 27 perguntas, garantindo que todas as regras aparecem */
+function buildQuestions() {
+    const guaranteed = [];
+    const rest = [];
+    RULES.forEach((_, r) => {
+        const list = shuffle(questionsData.filter(q => q.r === r));
+        guaranteed.push(list[0]);
+        rest.push(...list.slice(1));
+    });
+    const chosen = guaranteed.concat(shuffle(rest).slice(0, totalQuestions - guaranteed.length));
+    return shuffle(chosen).map(q => ({
+        r: q.r,
+        text: q.text,
+        why: q.why,
+        options: shuffle([{ t: q.right, ok: true }, { t: q.wrong[0], ok: false }, { t: q.wrong[1], ok: false }])
+    }));
+}
+
+/* ------------------ JOGO ------------------- */
+function startGame() {
+    questions = buildQuestions();
+    currentIndex = 0;
+    score = 0;
+    results = {};
+    answered = false;
+
+    finalEl.classList.remove("show");
+    finalEl.innerHTML = "";
+    nameScreen.style.display = "none";
+    quizEl.style.display = "block";
+
+    setRobot(null);
+    updateScore();
+    setProgress(0);
+    say("Olá, " + playerName + "! Vamos ver que bom colega tu és?");
+    showQuestion();
+}
+
+function showQuestion() {
+    const q = questions[currentIndex];
+    answered = false;
+
+    questionTextEl.textContent = q.text;
+    questionCounterEl.textContent = "Pergunta " + (currentIndex + 1) + " de " + totalQuestions;
+
+    optionsEl.innerHTML = "";
+    q.options.forEach((o, i) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option-btn";
+        btn.innerHTML = '<span class="num">' + (i + 1) + '</span><span class="txt"></span><span class="mark" aria-hidden="true"></span>';
+        btn.querySelector(".txt").textContent = o.t;
+        btn.addEventListener("click", () => handleAnswer(i));
+        optionsEl.appendChild(btn);
+    });
+
+    explainEl.classList.remove("show");
+    nextBtn.classList.remove("show");
+
+    if (currentIndex > 0) { setRobot(null); sayPick(PHRASES.intro); }
+}
+
+function handleAnswer(index) {
+    if (answered) return;
+    answered = true;
+    initAudio();
+
+    const q = questions[currentIndex];
+    const rule = RULES[q.r];
+    const btns = Array.from(optionsEl.children);
+    const correctIndex = q.options.findIndex(o => o.ok);
+    const isRight = index === correctIndex;
+
+    btns.forEach((b, i) => {
+        b.disabled = true;
+        if (i !== index && i !== correctIndex) b.classList.add("dim");
+    });
+
+    results[q.r] = results[q.r] || { ok: 0, total: 0 };
+    results[q.r].total++;
+
+    const verdict = $("ex-verdict");
+
+    if (isRight) {
+        score++;
+        results[q.r].ok++;
+        btns[index].classList.add("correct");
+        btns[index].querySelector(".mark").textContent = "✔";
+        verdict.textContent = "✔️ Muito bem! Essa é a atitude de um bom colega!";
+        setRobot("vb-happy");
+        sayPick(PHRASES.happy);
+        soundCorrect();
+    } else {
+        btns[index].classList.add("wrong");
+        btns[index].querySelector(".mark").textContent = "✖";
+        btns[correctIndex].classList.add("correct");
+        btns[correctIndex].querySelector(".mark").textContent = "✔";
+        verdict.textContent = "❌ Ups! Um bom colega faria a opção " + (correctIndex + 1) + ".";
+        setRobot("vb-sad");
+        sayPick(PHRASES.sad);
+        soundWrong();
+    }
+
+    updateScore();
+    setProgress(currentIndex + 1);
+
+    explainEl.style.setProperty("--rule", rule.c);
+    explainEl.style.setProperty("--rule-ink", rule.dark ? "#fff" : "#1b1b1b");
+    $("ex-emoji").textContent = rule.e;
+    $("ex-name").textContent = rule.n;
+    $("ex-text").textContent = q.why;
+    $("ex-rule").textContent = "Do cartaz: " + rule.n + " – " + rule.d;
+    explainEl.classList.add("show");
+
+    nextBtn.textContent = (currentIndex + 1 < totalQuestions) ? "Seguinte ▶" : "Ver resultado 🏆";
+    nextBtn.classList.add("show");
+    nextBtn.focus({ preventScroll: false });
+}
+
+nextBtn.addEventListener("click", () => {
+    if (!answered) return;
+    currentIndex++;
+    if (currentIndex < totalQuestions) {
+        showQuestion();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+        endGame();
+    }
+});
+
+/* Teclas 1, 2, 3 */
+document.addEventListener("keydown", e => {
+    if (answered || quizEl.style.display === "none" || e.target.tagName === "INPUT") return;
+    if (["1", "2", "3"].includes(e.key)) handleAnswer(Number(e.key) - 1);
+});
+
+function confetti() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const icons = ["🎉", "⭐", "💚", "✨", "🌟"];
+    for (let i = 0; i < 36; i++) {
+        const s = document.createElement("span");
+        s.className = "confetti";
+        s.textContent = icons[i % icons.length];
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.fontSize = (16 + Math.random() * 16) + "px";
+        s.style.animationDuration = (2 + Math.random() * 2) + "s";
+        s.style.animationDelay = (Math.random() * 0.8) + "s";
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 5000);
+    }
+}
+
+function endGame() {
+    quizEl.style.display = "none";
+    setRobot("vb-celebrate");
+    setProgress(totalQuestions);
+    soundWin();
+
+    const ratio = score / totalQuestions;
+    const starCount = ratio >= 0.9 ? 3 : ratio >= 0.6 ? 2 : 1;
+    const stars = "⭐".repeat(starCount) + "☆".repeat(3 - starCount);
+
+    let msg;
+    if (score === totalQuestions) msg = "🏆 Fantástico, " + esc(playerName) + "! Foste um excelente colega em todas as situações!";
+    else if (ratio >= 0.6)        msg = "🎉 Muito bem, " + esc(playerName) + "! Foste um bom colega na maioria das situações!";
+    else                          msg = "😊 Terminaste, " + esc(playerName) + "! Continua a praticar e vais ser um ótimo colega!";
+
+    say(score === totalQuestions ? "Uau, " + playerName + "! Pontuação perfeita!" : "Obrigado por jogares comigo, " + playerName + "!");
+
+    const chips = RULES.map((r, i) => {
+        const res = results[i];
+        if (!res) return "";
+        const good = res.ok === res.total;
+        return '<div class="chip' + (r.dark ? " dark-ink" : "") + '" style="--c:' + r.c + '">' +
+               '<span class="emoji">' + r.e + '</span><span class="name">' + r.n + '</span>' +
+               '<span class="st">' + (good ? "✔ " : "↻ ") + res.ok + "/" + res.total + '</span></div>';
+    }).join("");
+
+    finalEl.innerHTML =
+        '<div class="stars" aria-label="' + starCount + ' de 3 estrelas">' + stars + '</div>' +
+        '<p class="final-message">' + msg + '</p>' +
+        '<p class="final-score">Acertaste em ' + score + ' de ' + totalQuestions + ' situações.</p>' +
+        '<p class="review-title">As regras do cartaz</p>' +
+        '<div class="chips">' + chips + '</div>' +
+        '<button class="btn-restart-panel" type="button" onclick="startGame()">Jogar outra vez</button>';
+    finalEl.classList.add("show");
+
+    confetti();
+}
+
+
+/* ------------------ NOME DO JOGADOR ------------------- */
+function showNameScreen() {
+    quizEl.style.display = "none";
+    finalEl.classList.remove("show");
+    finalEl.innerHTML = "";
+    nameScreen.style.display = "block";
+    nameInput.value = playerName === "Colega" ? "" : playerName;
+    answered = true;               // bloqueia as teclas 1-3
+    setRobot(null);
+    setProgress(0);
+    say("Olá! Eu sou o VanBerto\u2019s. Como te chamas?");
+    nameInput.focus();
+}
+
+function confirmName() {
+    playerName = nameInput.value.trim().replace(/\s+/g, " ") || "Colega";
+    nameLabel.textContent = "\uD83D\uDC64 " + playerName;
+    startGame();
+}
+
+$("start-btn").addEventListener("click", () => { initAudio(); confirmName(); });
+nameInput.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); initAudio(); confirmName(); } });
+$("name-btn").addEventListener("click", showNameScreen);
+
+/* Clicar no robô: ele fala e salta */
+const TALK = ["Um bom colega sorri e ajuda! \uD83D\uDE0A", "Levanta a m\u00e3o e espera a tua vez! \u270B", "Juntos aprendemos mais! \uD83E\uDD1D", "Diz sempre a verdade! \uD83D\uDCE3", "Mant\u00e9m a sala limpa! \uD83E\uDDF9"];
+function vbTalk() {
+    if (vbMode) return;
+    resetRobotClasses(); void vbRobot.offsetWidth; vbRobot.classList.add("vb-happy");
+    vbMode = "happy"; vbDraw(false);
+    say(pick(TALK));
+    setTimeout(() => { if (vbMode === "happy") setRobot(null); }, 800);
+}
+vbRobot.addEventListener("click", vbTalk);
+vbRobot.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); vbTalk(); } });
+
+/* Iniciar */
+showNameScreen();
 </script>
+
 </body>
 </html>
