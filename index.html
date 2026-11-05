@@ -72,7 +72,7 @@ body{min-height:100vh;display:flex;justify-content:center;align-items:flex-start
 .final{text-align:center;padding:16px}
 .final .big{font-size:3rem}
 #credit{text-align:center;margin-top:12px;font-size:.85rem;color:#4b5563}
-@media(max-width:600px){#game{margin:8px;padding:12px}#vb{width:100px}#talk{text-align:center}}
+@media(max-width:600px){#game{margin:8px;padding:12px}#vb{width:100px}#talk{text-align:center}#fvb{width:64px}#fbub{max-width:140px;font-size:.72rem;padding:5px 8px}#fname{font-size:.75rem}}
 @media(prefers-reduced-motion:reduce){.star,.meteor{display:none}}
 .tag{font:inherit;color:#0f172a}
 .tag:focus-visible,#fvb:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
@@ -88,7 +88,7 @@ body{padding-bottom:120px}
 #fname{font-weight:800;font-size:.85rem;color:#fde047;text-shadow:0 1px 6px #000;max-width:150px;text-align:center;overflow-wrap:anywhere}
 #talk{max-width:640px;margin:0 auto;text-align:center}#hero{display:block}
 #fw{touch-action:none;cursor:grab;user-select:none}
-body{padding-bottom:20px}
+body{padding-bottom:130px}
 .it{touch-action:none;cursor:grab}
 .ghost{position:fixed;z-index:10000;pointer-events:none;transform:translate(-50%,-50%) scale(1.06);min-width:0;opacity:.95;box-shadow:0 10px 24px rgba(15,23,42,.4);border-color:#4f46e5}
 .dragging{opacity:.35}
@@ -307,7 +307,7 @@ const CV=['fvb'].map(i=>{const c=$(i),x=c.getContext('2d'),D=Math.min(devicePixe
 const draw=(b,s,a)=>CV.forEach(x=>drawVBAtual(x,b,s,a));
 let tok=0,quiet=0,bt=null;
 function play(fr){const t=++tok;let i=0;(function n(){if(t!==tok)return;if(i>=fr.length){draw(false,-1,false);return}const f=fr[i++];draw(f[0],f[1],f[2]);setTimeout(n,f[3])})()}
-function bub(t){const b=$('fbub');b.textContent=t;b.classList.add('show');clearTimeout(bt);bt=setTimeout(()=>b.classList.remove('show'),3500)}
+function bub(t){const b=$('fbub');b.textContent=t;b.classList.add('show');clearTimeout(bt);bt=setTimeout(()=>b.classList.remove('show'),2600)}
 function robot(m){quiet=Date.now()+2500;
   [$('fvb')].forEach(e=>{e.classList.remove('glow','shake','dance');void e.offsetWidth;e.classList.add(m);setTimeout(()=>e.classList.remove(m),900)});
   play(m==='glow'?[['happy',-1,true,800]]:m==='shake'?[['sad',-1,false,1300]]:[['wink',0,false,180],['happy',1,true,180],['happy',0,true,180],['happy',1,true,180],['wink',-1,true,500]])}
@@ -351,83 +351,155 @@ const RULES = [
 
 /* r = índice da regra; right = resposta certa; wrong = duas erradas */
 const questionsData = [
-    { r: 0, text: "Um colega chega de manhã à sala. O que fazes?",
-      right: "Cumprimentas com um sorriso.",
-      wrong: ["Viras a cara para o lado.", "Finges que não o vês."] },
-    { r: 0, text: "Entras na sala e a professora já lá está. O que fazes?",
-      right: "Dizes “Bom dia, professora!”.",
-      wrong: ["Entras sem dizer nada e vais logo para o lugar.", "Resmungas porque preferias estar em casa."] },
-
-    { r: 1, text: "Dois colegas começam a discutir por causa de um jogo. O que faz um bom colega?",
-      right: "Ajuda a acalmar e sugere que partilhem o jogo.",
-      wrong: ["Põe-se do lado de um e grita com o outro.", "Incentiva a discussão para ver quem ganha."] },
-    { r: 1, text: "Um colega está triste no recreio. O que faz um bom colega?",
-      right: "Pergunta se precisa de ajuda.",
-      wrong: ["Diz “isso não é problema meu”.", "Ri-se da cara dele."] },
-
-    { r: 2, text: "Amanhã há aula de Português. O que fazes antes de ir para a escola?",
-      right: "Verificas se tens o caderno, o lápis e o material todo.",
-      wrong: ["Deixas para ver quando chegares à escola.", "Pedes sempre o material aos colegas."] },
-    { r: 2, text: "A professora começa uma atividade nova. Como age um bom colega?",
-      right: "Está atento e com vontade de aprender.",
-      wrong: ["Diz logo que é muito difícil, sem tentar.", "Distrai-se a desenhar na mesa."] },
-
+    { r: 0, text: "Chegas à escola e encontras a funcionária à porta. O que fazes?",
+      right: "Dizes “Bom dia!” com um sorriso.",
+      wrong: ["Passas sem dizer nada, porque tens pressa.", "Só cumprimentas os teus amigos."],
+      why: "Cumprimentar todos, e não só os amigos, mostra respeito." },
+    { r: 0, text: "Um colega que não conheces bem entra na sala. O que fazes?",
+      right: "Dizes “Olá!” e sorris.",
+      wrong: ["Esperas que ele diga primeiro.", "Finges que não o vês."],
+      why: "Começar com um “Olá” faz qualquer pessoa sentir-se bem-vinda." },
+    { r: 0, text: "A aula acabou e vais sair da sala. O que faz um bom colega?",
+      right: "Despede-se da professora e dos colegas.",
+      wrong: ["Sai a correr sem dizer nada.", "Só se despede se a professora olhar para ele."],
+      why: "Despedir-se também é uma forma de cumprimentar com educação." },
+    { r: 1, text: "Dois colegas discutem por causa de uma jogada no recreio. O que faz um bom colega?",
+      right: "Ajuda a acalmar e propõe repetir a jogada.",
+      wrong: ["Fica do lado do amigo mais próximo e grita com o outro.", "Chama mais colegas para verem a confusão."],
+      why: "Um colega simpático ajuda a resolver o conflito, em vez de o aumentar." },
+    { r: 1, text: "Um colega está sozinho no recreio. O que fazes?",
+      right: "Convidas para brincar contigo.",
+      wrong: ["Achas que ele gosta de estar sozinho e deixas-o.", "Dizes aos outros que ele é esquisito."],
+      why: "Convidar quem está sozinho é uma forma simples de ajudar." },
+    { r: 1, text: "Um colega disse uma coisa que te irritou. Como reages?",
+      right: "Respiras fundo e dizes com calma o que sentiste.",
+      wrong: ["Respondes com um insulto.", "Ficas sem lhe falar durante uma semana."],
+      why: "Falar com calma evita conflitos e resolve o problema mais depressa." },
+    { r: 2, text: "Amanhã há aula de Português. O que fazes antes de ires para a escola?",
+      right: "Verificas a mochila e preparas o material.",
+      wrong: ["Deixas para ver de manhã, à pressa.", "Contas pedir tudo emprestado aos colegas."],
+      why: "Preparar a mochila na véspera evita esquecimentos e atrasos." },
+    { r: 2, text: "Esqueceste-te do lápis em casa. O que fazes?",
+      right: "Pedes emprestado com educação e lembras-te de o trazer amanhã.",
+      wrong: ["Ficas sem fazer nada, porque não tens lápis.", "Tiras um lápis da mochila de um colega sem pedir."],
+      why: "Podemos esquecer-nos de algo, mas pedir bem e corrigir no dia seguinte é a atitude certa." },
+    { r: 2, text: "A professora vai começar uma matéria nova. Como te preparas?",
+      right: "Arrumas o que não precisas e ficas atento.",
+      wrong: ["Continuas a conversar com o colega do lado.", "Pensas que vai ser aborrecido e desligas."],
+      why: "Vir com vontade de aprender começa por estar atento desde o primeiro minuto." },
     { r: 3, text: "A professora está a explicar e tu queres falar. O que deves fazer?",
       right: "Levantar a mão e esperar a tua vez.",
-      wrong: ["Começar a falar por cima.", "Fazer barulho para chamar a atenção."] },
-    { r: 3, text: "Um colega está a contar uma ideia e tu tens outra. O que fazes?",
-      right: "Esperas que ele acabe e levantas a mão.",
-      wrong: ["Interrompes e dizes que a ideia dele é má.", "Ris-te da ideia dele."] },
-
+      wrong: ["Começar a falar por cima.", "Fazer barulho para chamar a atenção."],
+      why: "Esperar a vez deixa todos ouvirem a explicação." },
+    { r: 3, text: "Sabes a resposta, mas a professora perguntou a outro colega. O que fazes?",
+      right: "Esperas e, se for preciso, levantas a mão no fim.",
+      wrong: ["Dizes a resposta em voz alta por cima dele.", "Sopras a resposta ao colega."],
+      why: "Deixar o colega pensar dá-lhe a oportunidade de aprender." },
+    { r: 3, text: "Vários colegas querem falar ao mesmo tempo. Como se resolve?",
+      right: "Cada um levanta a mão e fala à sua vez.",
+      wrong: ["Fala quem gritar mais alto.", "Fala quem estiver mais perto da professora."],
+      why: "Com a mão levantada, todos merecem ser ouvidos." },
     { r: 4, text: "Chegas à sala e vês lixo no chão. O que fazes?",
       right: "Apanhas e colocas no caixote do lixo.",
-      wrong: ["Empurras com o pé.", "Finges que não é contigo."] },
+      wrong: ["Empurras com o pé para debaixo da mesa.", "Finges que não é contigo."],
+      why: "Cuidar da sala é tarefa de todos, mesmo do lixo que não foi nosso." },
     { r: 4, text: "Acabaste o lanche no recreio e tens a embalagem na mão. O que fazes?",
       right: "Deitas no caixote do lixo.",
-      wrong: ["Deixas debaixo do banco.", "Atiras para o chão, alguém há de apanhar."] },
-
+      wrong: ["Deixas debaixo do banco.", "Atiras para o chão, alguém há de apanhar."],
+      why: "O recreio fica limpo quando cada um deita o seu lixo no sítio certo." },
+    { r: 4, text: "Acabaste de pintar e a mesa ficou suja de tinta. O que fazes?",
+      right: "Limpas a mesa antes de saíres.",
+      wrong: ["Deixas, porque há de vir alguém da limpeza.", "Dizes que a mesa já estava suja."],
+      why: "Quem suja deve limpar: assim a sala fica boa para a próxima turma." },
     { r: 5, text: "A professora pede para arrumar o computador ou o tablet. O que fazes?",
       right: "Arrumas com cuidado, como te ensinaram.",
-      wrong: ["Fechas à pressa e deixas tudo desarrumado.", "Dizes que não foste tu que usaste."] },
+      wrong: ["Fechas à pressa e deixas tudo desarrumado.", "Dizes que não foste tu que usaste."],
+      why: "Os equipamentos são de todos e precisam de cuidado." },
     { r: 5, text: "A professora diz para usares o tablet só para a atividade. O que fazes?",
       right: "Usas só para a atividade, como foi pedido.",
-      wrong: ["Abres jogos às escondidas.", "Mexes nos tablets dos colegas sem pedir."] },
-
+      wrong: ["Abres jogos às escondidas.", "Mexes nos tablets dos colegas sem pedir."],
+      why: "Seguir as instruções da professora é usar a tecnologia de forma responsável." },
+    { r: 5, text: "Numa pesquisa, aparece um site a pedir o teu nome e a tua morada para ganhares um prémio. O que fazes?",
+      right: "Não escreves nada e chamas a professora.",
+      wrong: ["Preenches, para ver se ganhas o prémio.", "Clicas em tudo para fechar a janela."],
+      why: "Dados pessoais não se partilham na internet sem falar com um adulto." },
     { r: 6, text: "Estás num trabalho de grupo. Como age um bom colega?",
       right: "Partilha ideias e ouve os outros.",
-      wrong: ["Quer mandar em tudo sozinho.", "Não deixa ninguém falar."] },
+      wrong: ["Quer mandar em tudo sozinho.", "Não deixa ninguém falar."],
+      why: "Num grupo, as ideias de todos juntas dão um trabalho melhor." },
     { r: 6, text: "Um colega comete um erro numa atividade. Como és um bom colega?",
-      right: "Ajudas e dizes que está tudo bem, todos erram.",
-      wrong: ["Gozas com ele à frente da turma.", "Gritas que ele errou."] },
-
+      right: "Ajudas e dizes que está tudo bem, todos erramos.",
+      wrong: ["Gozas com ele à frente da turma.", "Gritas que ele errou."],
+      why: "Errar faz parte de aprender, e ajudar faz o colega ganhar confiança." },
+    { r: 6, text: "Um colega do grupo não está a fazer a sua parte. O que fazes?",
+      right: "Perguntas se precisa de ajuda e combinam as tarefas.",
+      wrong: ["Fazes tudo sozinho e ficas zangado.", "Dizes à turma que ele não faz nada."],
+      why: "Perguntar com calma ajuda o grupo a trabalhar junto." },
     { r: 7, text: "A aula começa às 9h. O que faz um bom colega?",
       right: "Chega a horas e já com tudo pronto.",
-      wrong: ["Chega sempre depois do toque.", "Fica a brincar no recreio depois do toque."] },
+      wrong: ["Chega sempre depois do toque.", "Fica a brincar no recreio depois do toque."],
+      why: "Chegar a horas respeita a professora e os colegas." },
     { r: 7, text: "Tens de entregar um trabalho até sexta-feira. O que fazes?",
       right: "Fazes com tempo e entregas no prazo.",
-      wrong: ["Deixas para a última hora e não entregas.", "Inventas uma desculpa em vez de fazer o trabalho."] },
-
+      wrong: ["Deixas para a última hora e não entregas.", "Inventas uma desculpa em vez de fazer o trabalho."],
+      why: "Cumprir prazos mostra responsabilidade." },
+    { r: 7, text: "O recreio acabou e o toque já soou. O que fazes?",
+      right: "Vais logo para a fila ou para a sala.",
+      wrong: ["Acabas o jogo primeiro, é só mais um minuto.", "Esperas que alguém te venha buscar."],
+      why: "Cumprir os horários evita atrasos e ajuda toda a turma." },
     { r: 8, text: "Partiste sem querer o lápis de um colega. O que fazes?",
       right: "Contas a verdade e pedes desculpa.",
-      wrong: ["Escondes o lápis e finges que não sabes.", "Dizes que foi outro colega."] },
+      wrong: ["Escondes o lápis e finges que não sabes.", "Dizes que foi outro colega."],
+      why: "Dizer a verdade é difícil, mas faz-nos mais fortes e merecedores de confiança." },
     { r: 8, text: "Não percebeste a matéria. O que faz um bom colega?",
       right: "Pede ajuda à professora.",
-      wrong: ["Finge que percebeu.", "Copia do colega sem perceber."] }
+      wrong: ["Finge que percebeu.", "Copia do colega sem perceber."],
+      why: "Pedir ajuda não é fraqueza: é o primeiro passo para aprender." },
+    { r: 8, text: "Encontras no chão da sala uma coisa que não é tua. O que fazes?",
+      right: "Entregas à professora para descobrir o dono.",
+      wrong: ["Ficas com ela, ninguém viu.", "Perguntas só aos teus amigos e, se ninguém quiser, guardas."],
+      why: "Ser honesto é devolver o que não é nosso, mesmo que ninguém esteja a ver." }
 ];
 
 
 let M=[],RES={};
+const GOOD=[
+ "Cumprimentar a professora e os colegas com um sorriso.",
+ "Convidar um colega que está sozinho para brincar.",
+ "Verificar a mochila antes de ir para a escola.",
+ "Levantar a mão e esperar pela minha vez de falar.",
+ "Deitar a embalagem do lanche no caixote do lixo.",
+ "Usar o tablet só para a atividade que a professora pediu.",
+ "Ajudar um colega que ainda não percebeu a tarefa.",
+ "Chegar a horas e entregar os trabalhos no prazo.",
+ "Contar a verdade e pedir desculpa quando faço um erro.",
+ "Pedir ajuda à professora quando não percebo a matéria.",
+ "Ouvir as ideias de todos num trabalho de grupo.",
+ "Entregar à professora o que encontro no chão da sala."];
+const BAD=[
+ "Fingir que não vejo o colega que chegou.",
+ "Rir-me de um colega que errou.",
+ "Esquecer o material e pedir tudo aos outros.",
+ "Falar por cima da professora.",
+ "Atirar o lixo para o chão do recreio.",
+ "Abrir jogos escondido no tablet.",
+ "Fazer troça de um colega à frente da turma.",
+ "Chegar sempre atrasado depois do toque.",
+ "Esconder o que parti e dizer que foi outro.",
+ "Fingir que percebi para não pedir ajuda.",
+ "Mandar em tudo no trabalho de grupo.",
+ "Ficar com o que não é meu, porque ninguém viu."];
 function build(){
   const byRule=RULES.map((_,r)=>questionsData.filter(q=>q.r===r));
   let ch=byRule.map(l=>l[Math.floor(Math.random()*l.length)]);
   ch=shuf(ch.concat(shuf(questionsData.filter(q=>!ch.includes(q))).slice(0,2)));
   const Q=ch.map(q=>{const R=RULES[q.r];return{z:'Na escola',t:'O que fazes?',f:q.text,k:'single',c:R.c,r:q.r,
-    h:'Pensa no que um bom colega faria: respeita, ajuda e diz a verdade.',o:[[q.right,1],...q.wrong.map(w=>[w])],d:'Do cartaz: '+R.n+' – '+R.d}});
-  const rights=shuf(questionsData.map(q=>q.right)),wrongs=shuf(questionsData.flatMap(q=>q.wrong));
+    h:'Pensa no que um bom colega faria: respeita, ajuda e diz a verdade.',o:[[q.right,1],...q.wrong.map(w=>[w])],d:q.why+' (Do cartaz: '+R.n+'.)'}});
+  const g=shuf(GOOD),b=shuf(BAD);
   const triage={z:'Cartaz da turma',t:'Bom colega ou não?',f:'Arrasta cada atitude para o sítio certo.',k:'match',c:'#0f766e',A:'Atitudes',B:'Onde fica?',
-    items:[...rights.slice(0,3).map(t=>[t,'g']),...wrongs.slice(0,3).map(t=>[t,'b'])],targets:[['✅ Bom colega',['g']],['❌ Tenho de melhorar',['b']]]};
+    items:[...g.slice(0,3).map(t=>[t,'g']),...b.slice(0,3).map(t=>[t,'b'])],targets:[['✅ Bom colega',['g']],['❌ Tenho de melhorar',['b']]]};
   const judge={z:'Recreio',t:'Bom exemplo ou mau exemplo?',f:'Lê cada atitude e decide se é de um bom colega.',k:'judge',c:'#e395c0',lab:['👍 Bom colega','👎 Mau exemplo'],
-    s:shuf([...rights.slice(3,6).map(t=>[t,1]),...wrongs.slice(3,6).map(t=>[t,0])])};
+    s:shuf([...g.slice(3,6).map(t=>[t,1]),...b.slice(3,6).map(t=>[t,0])])};
   const order={z:'O teu dia na escola',t:'Ordena o dia de um bom colega',f:'Clica nos passos pela ordem certa, desde que chegas à escola!',k:'order',c:'#0bc1e0',
     steps:['Chegar a horas à escola','Cumprimentar os colegas e a professora','Preparar o material da aula','Levantar a mão para falar','Deitar o lixo no caixote antes de sair'],
     d:'Chegas a horas, cumprimentas, preparas o material, participas e deixas tudo limpo.'};
